@@ -1,0 +1,43 @@
+{
+  "name": "hyperworld",
+  "version": "1.19.0",
+  "description": "Virtual World of Things.",
+  "main": "index.js",
+  "bin": {
+    "hyperworld": "cli.mjs"
+  },
+  "scripts": {
+    "docs": "cp screenshot*.png docs; esdoc;",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fantasyui-com/hyperworld.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fantasyui-com/hyperworld/issues"
+  },
+  "homepage": "https://github.com/fantasyui-com/hyperworld#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "cors": "^2.8.5",
+    "enquirer": "^2.3.1",
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.1.2",
+    "hyperworld-readline": "^1.2.0",
+    "lodash": "^4.17.15",
+    "prompts": "^2.2.1",
+    "socket.io": "^2.2.0",
+    "traverse": "^0.6.6",
+    "uuid": "^3.3.2",
+    "x2js": "^3.3.1",
+    "xml-js": "^1.6.11"
+  }
+}
