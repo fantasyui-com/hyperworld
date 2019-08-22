@@ -3,15 +3,15 @@ import {inspect} from 'util';
 import registry from 'registry';
 
 import Universe from 'Universe';
+import Commands from 'Commands';
 import Session from 'Session';
 
 export default class Root {
 
   universe = new Universe();
+  commands = new Commands();
 
   constructor({ mapFile, godMode, screenPrinter, userName, context }) {
-
-    // registry.root = this;
 
     Object.entries({ mapFile, godMode, screenPrinter, userName, context })
     .filter(([key, value]) => value !== undefined)
@@ -24,6 +24,7 @@ export default class Root {
   async initialize(){
 
     await this.universe.initialize();
+    await this.commands.initialize();
 
     console.log(registry)
     registry.universe.show();
@@ -31,10 +32,10 @@ export default class Root {
 
   async login(username, password){
 
-    const session = new Session();
+    const session = new Session({username, password});
 
     await session.initialize();
-    session.user.avatar.location = registry.universe.location('home');
+    session.user.avatar.location = 'website';
 
     return session;
 
