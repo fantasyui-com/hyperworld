@@ -30,7 +30,9 @@ export default class Root {
   }
 
   async login(username, password){
+
     const session = new Session({username, password});
+
     await session.initialize();
     session.user.avatar.location = 'website';
     return session;
