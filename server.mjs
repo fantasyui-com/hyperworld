@@ -13,7 +13,7 @@ async function main(){
     .option('-u, --user-name [name]', 'Your username', (process.env.USER||'anonymous'))
     .option('-m, --map-file [file]', 'Load world from an xml file.')
     .option('-g, --god-mode', 'Enable god mode.')
-    .option('-s, --screen-printer [name]', 'name of screen printer', 'enquirer')
+    .option('-s, --screen-printer [name]', 'name of screen printer', 'bootstrap')
     .parse(process.argv)
 
     const options = Object.entries(program).filter(([name])=>!name.startsWith('_')).filter(([name])=>!['Command', 'Option', 'rawArgs', 'commands', 'options', 'parent'].includes(name)).reduce((a,[k,v])=>({...a,[k]:v}),{})

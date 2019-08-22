@@ -1,3 +1,5 @@
+import {inspect} from 'util';
+
 import registry from 'registry';
 
 import Universe from 'Universe';
@@ -6,11 +8,10 @@ import Session from 'Session';
 export default class Root {
 
   universe = new Universe();
-  session = new Session();
 
   constructor({ mapFile, godMode, screenPrinter, userName, context }) {
 
-    registry.root = this;
+    // registry.root = this;
 
     Object.entries({ mapFile, godMode, screenPrinter, userName, context })
     .filter(([key, value]) => value !== undefined)
@@ -23,10 +24,20 @@ export default class Root {
   async initialize(){
 
     await this.universe.initialize();
-    await this.session.initialize();
 
-    console.log(this)
     console.log(registry)
+    registry.universe.show();
+  }
+
+  async login(username, password){
+
+    const session = new Session();
+
+    await session.initialize();
+    session.user.avatar.location = registry.universe.location('home');
+
+    return session;
+
   }
 
 }

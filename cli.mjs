@@ -16,7 +16,9 @@ async function main(){
 
     const world = new HyperWorld(options);
     await world.initialize();
-    //await world.avatar.processInput('look'); // this is how a user commands his avatar
+
+    const session = await world.login('alice', 'qwerty');
+    session.user.avatar.command('look');
     //await world.showPrompt();
 
 }
