@@ -7,6 +7,9 @@
     "hyperworld": "cli.mjs"
   },
   "scripts": {
+    "sw": "chokidar \"**/*.mjs\" \"public/*.html\" -c 'kill $(lsof -t -i:3000); ps -auxw | grep server.mjs; npm run server'",
+    "server": "./server.mjs -m maps/website.xml",
+    "cli": "./cli.mjs -m maps/website.xml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

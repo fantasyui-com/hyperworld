@@ -1,5 +1,5 @@
 # hyperworld
-Virtual World of Things.
+Virtual World of Objects.
 
 ![screenshot](screenshot.png)
 ![screenshot-conversation](screenshot-conversation.png)
@@ -14,5 +14,3 @@ Virtual World of Things.
 - Avatar's Assistant volunteers information about environment, about things in the room, on a new location event.
 
 When the avatar of the logged in user looks around
-
-radio.emit('state', state => this.state = state );

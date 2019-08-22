@@ -41,12 +41,20 @@
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>
 <script>
+
   const socket = io('http://localhost:3000');
 
   socket.on('connect', () => {
+
     console.log(socket.id); // 'G5p5...'
 
-    socket.emit('login', 'alice:qwerty');
+    socket.emit('server-login', {username:'alice', password:'qwerty'}, function (response) { // args are sent in order to acknowledgement function
+      console.log('Server response', response); // data will be 'tobi says woot'
+    });
+
+    socket.on('screen', function(data){
+      console.log('Whoa, server sent a screen directive!', data)
+    });
 
     socket.on('welcome', function(msg){
       console.log('server said', msg)
