@@ -1,0 +1,35 @@
+
+<conversation name="login">
+
+  <procedure>
+
+    <print delay="500" text="Hello">
+
+      <select delay="900" name="account" text="Do you have an account with us?">
+
+        <choice text="Yes, I do." description="Select if you have an account with us." value="registered">
+          <print delay="500" text="Great!, please enter your username and password."/>
+          <input name="username" text="Enter Username"/>
+          <input name="password" text="Enter Password"/>
+
+          <action text="login {{username}} {{password}}"/>
+        </choice>
+
+        <choice text="No, I don't" description="You will be asked to register with us." value="unregistered">
+          <print delay="500" text="No problem, let's get you into the system real quick, please enter your email, username and password."/>
+          <input name="email" text="Enter Email"/>
+          <input name="username" text="Enter Username"/>
+          <input name="password" text="Enter Password"/>
+
+          <action text="login {{username}} {{password}}"/>
+        </choice>
+
+      </select>
+
+    </print>
+
+
+  </procedure>
+
+
+</conversation>
