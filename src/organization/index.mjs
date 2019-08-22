@@ -25,20 +25,15 @@ export default class Root {
 
     await this.universe.initialize();
     await this.commands.initialize();
-
-    console.log(registry)
+    // console.log(registry)
     registry.universe.show();
   }
 
   async login(username, password){
-
     const session = new Session({username, password});
-
     await session.initialize();
     session.user.avatar.location = 'website';
-
     return session;
-
   }
 
 }

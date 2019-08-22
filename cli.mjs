@@ -20,7 +20,7 @@ async function main(){
 
     const session = await world.login(options.username, options.password);
     session.user.avatar.command('look');
-    //await world.showPrompt();
+    session.user.screen.prompt();
 
 }
 
