@@ -33,16 +33,29 @@ async function main(){
       let session = null;
       console.log('a user connected');
 
-      socket.on('server-login', async function({username, password}){
+      socket.on('server-login', async function({username, password}, respond){
 
-        session = await world.login(username, password);
+        try{
+          session = await world.login(username, password);
+          session.socket = socket
+          respond({success:true})
+          //socket.emit('screen', await session.user.screen.info('Session established.'))
+        }catch(e){
+          respond({success:false, text:e.message})
+          return;
+        }
 
-        socket.emit('screen', await session.user.screen.info('session established'))
+
+
+        // socket.emit('screen', await session.user.screen.info('session established'))
+        await session.user.screen.info('Hello!')
 
         //await world.showPrompt();
-        socket.on('command', function(command){
-          const response = session.user.avatar.command('look');
-          socket.emit(response);
+        socket.on('command', async function(packet, respond){
+          await session.user.avatar.command(packet.command);
+          // console.log(`response to ${packet.command}`, response)
+          // respond(response);
+          // socket.emit(response);
         });
 
       });

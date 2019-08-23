@@ -31,6 +31,11 @@ export default class Root {
 
   async login(username, password){
 
+    if(password.length==1){
+      throw new Error('Bad Login...')
+      return;
+    }
+
     const session = new Session({username, password});
 
     await session.initialize();
