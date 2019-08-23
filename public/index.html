@@ -216,6 +216,14 @@
         setTimeout(()=>{
           card.fadeOut(myCard, true);
         }, 4000);
+      }else{
+        const myCard = card.create({
+          "username": "boo",
+          "type": "alert",
+          "kind": "info",
+          "text": JSON.stringify(data)
+        });
+        console.log(data)
       }
 
 
