@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="generator" content="">
+    <title>Card Table</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+
+    <style>
+      .animated {
+        transition: opacity 400ms;
+      }
+      .show {
+        opacity: 1;
+      }
+      .hide {
+        opacity: 0;
+      }
+    </style>
+
+  </head>
+
+  <body class="text-center">
+
+
+    <div class="container">
+  <div id="dashboard" class="row">
+
+
+    <div id="command-card" class="col-md-4 col-lg-3 p-1 animated hide">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Command Card</div>
+        <div class="card-body">
+          <h5 class="card-title">Enter a command below, type in 'help' for more information.</h5>
+          <p class="card-text">
+            <form id="command-form" class="form-signin d-inline-block">
+            <label for="command" class="sr-only">Command</label>
+            <input type="text" id="command" name="command" class="form-control mb-2" placeholder="" required autofocus>
+            </form>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="login-card" class="col-md-4 col-lg-3 p-1 animated hide">
+      <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-header">Please sign in</div>
+        <div class="card-body">
+          <h5 class="card-title">Danger card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <form id="login-form" class="form-signin d-inline-block">
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control mb-2" placeholder="Username" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control mb-2" placeholder="Password" required>
+            <div class="checkbox m-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 small">&copy; 2017-2019</p>
+          </form>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script>
+
+
+  const card = {
+
+
+
+    create: function(data){
+      let html = `
+        <div class="card text-white bg-${data.kind} mb-3">
+          <div class="card-header">Info Card</div>
+          <div class="card-body">
+            <h5 class="card-title">From Server</h5>
+            <p class="card-text">${data.text}</p>
+          </div>
+        </div>
+      `;
+      const card = document.createElement("div");
+      card.className = 'col-md-4 col-lg-3 p-1 animated show';
+      card.innerHTML = html;
+      document.getElementById('dashboard').prepend(card);
+      return card;
+    },
+
+
+    fadeIn: function (selector){
+
+      let elements;
+      if(typeof selector == 'string'){
+        elements = document.querySelectorAll(selector);
+      }else{
+        elements = [selector];
+      }
+
+      elements.forEach(function(el){
+      el.classList.add('show');
+      el.classList.remove('hide');
+      })
+    },
+    fadeOut: function (selector, remove){
+
+      let elements;
+      if(typeof selector == 'string'){
+        elements = document.querySelectorAll(selector);
+      }else{
+        elements = [selector];
+      }
+
+      elements.forEach(function(el){
+      el.classList.add('hide');
+      el.classList.remove('show');
+
+      if(remove){
+        el.addEventListener('transitionend', () => {
+          document.getElementById('dashboard').removeChild(el)
+        });
+      }
+
+      })
+    }
+  }
+
+
+
+  document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(document.getElementById('login-form'));
+    packet = {};
+    for (const [key,value] of formData){
+      packet[key] = value;
+    }
+    socket.emit('server-login', packet, function (response) { // args are sent in order to acknowledgement function
+      console.log('Server response', response);
+      if(response.success){
+        card.fadeOut('#login-card')
+        card.fadeIn('#command-card');
+      }else{
+        // try again
+        const myCard = card.create({
+          "type": "alert",
+          "kind": "info",
+          "text": response.text
+        });
+        setTimeout(()=>{
+          card.fadeOut(myCard, true);
+        }, 2000);
+      }
+    });
+  });
+
+  document.getElementById('command-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(document.getElementById('command-form'));
+    packet = {};
+    for (const [key,value] of formData){
+      packet[key] = value;
+    }
+    console.log('command', packet);
+    socket.emit('command', packet, function (response) { // args are sent in order to acknowledgement function
+      console.log('Server response', response);
+    });
+  });
+
+
+  const socket = io('http://localhost:3000');
+
+  socket.on('connect', () => {
+
+    console.log(socket.id); // 'G5p5...'
+
+    // socket.emit('server-login', {username:'alice', password:'qwerty'}, function (response) { // args are sent in order to acknowledgement function
+    //   console.log('Server response', response);
+    // });
+
+    card.fadeIn('#login-card')
+
+    // setTimeout(function(){
+    //   card.fadeIn('#login-card')
+    //   setTimeout(function(){
+    //     //card.fadeOut('#login-card')
+    //   },4000)
+    // },1000)
+
+    socket.on('screen', function(data){
+      // {
+      //   "username": "boo",
+      //   "type": "alert",
+      //   "kind": "info",
+      //   "text": "session established"
+      // }
+
+      if(data.type == 'alert'){
+        const myCard = card.create(data);
+        setTimeout(()=>{
+          card.fadeOut(myCard, true);
+        }, 4000);
+      }else{
+        const myCard = card.create({
+          "username": "boo",
+          "type": "alert",
+          "kind": "info",
+          "text": JSON.stringify(data)
+        });
+        console.log(data)
+      }
+
+
+    });
+
+    socket.on('welcome', function(msg){
+      console.log('server said', msg)
+    });
+
+  });
+
+
+</script>
+</body>
+</html>
