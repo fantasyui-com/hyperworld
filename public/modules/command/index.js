@@ -7,13 +7,13 @@ export default async function install ({emitter}) {
       event.preventDefault();
 
       const formData = new FormData(document.getElementById('command-form'));
-      packet = {};
+      const packet = {};
       for (const [key,value] of formData){
         packet[key] = value;
       }
       console.log('command', packet);
-      socket.emit('command', packet, function (response) { // args are sent in order to acknowledgement function
-        console.log('Server response', response);
+      emitter.emit('command', packet, function (response) { // args are sent in order to acknowledgement function
+        console.log('response: Server response', response);
       });
     });
 

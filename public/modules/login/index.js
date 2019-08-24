@@ -1,36 +1,30 @@
 export default async function install ({emitter}) {
-
+  emitter.on('login-show',()=>{
+    $('#loginModal').modal({})
+  });
+  emitter.on('login-hide',()=>{
+    $('#loginModal').modal('hide')
+  });
+  emitter.on('login-message',(text)=>{
+    $('#loginModal .alert .message').text(text)
+  });
   const htmlString = await fetch(`modules/login/index.html`).then(function(response){return response.text();})
   document.body.insertAdjacentHTML('beforeend', htmlString);
-
   document
     .getElementById('login-form')
     .addEventListener('submit', function(event) {
-    console.log('XXXX')
     event.preventDefault();
-
     const formData = new FormData(document.getElementById('login-form'));
-    packet = {};
+    const packet = {};
     for (const [key,value] of formData){
       packet[key] = value;
     }
-    emitter.emit('server-login', packet, function (response) { // args are sent in order to acknowledgement function
-      console.log('Server response', response);
+    emitter.emit('server-login', packet, function (response) {
       if(response.success){
-        card.fadeOut('#login-card')
-        card.fadeIn('#command-card');
+        emitter.emit('login-hide');
       }else{
-        // try again
-        const myCard = card.create({
-          "type": "alert",
-          "kind": "info",
-          "text": response.text
-        });
-        setTimeout(()=>{
-          card.fadeOut(myCard, true);
-        }, 2000);
+        emitter.emit('login-message', response.text);
       }
     });
   });
-
 }
