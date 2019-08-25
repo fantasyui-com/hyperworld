@@ -1,24 +1,31 @@
 import loginComponentInstallation from '/modules/login/index.js';
 import commandComponentInstallation from '/modules/command/index.js';
+import navigationComponentInstallation from '/modules/navigation/index.js';
 
 const program = new EventEmitter();
 
 async function main(){
 
   // Initialize Components
+  await navigationComponentInstallation({emitter:program});
   await loginComponentInstallation({emitter:program});
   await commandComponentInstallation({emitter:program});
 
   // Initialize Emitter Events
 
 
-  program.on('screen',(data)=>{
-    // got screen data...
-    const {format} = data;
-    /* ... */
-    // packet handling is to be decided
-    console.info('Got a screen packet!')
-    console.info(data)
+  program.on('screen',(input)=>{
+
+    const {format, type, ...packet} = input;
+
+    console.info('Got a screen packet!', {format, type, packet})
+
+    if(format === 'data'){
+      program.emit(type, packet)
+    }else{
+      program.emit(format, packet)
+    }
+
   });
 
 
