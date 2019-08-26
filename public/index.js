@@ -2,12 +2,14 @@ import loginComponentInstallation from '/modules/login/index.js';
 import commandComponentInstallation from '/modules/command/index.js';
 import navigationComponentInstallation from '/modules/navigation/index.js';
 
+import navigationContainer from '/modules/navigation-container/index.js';
+
 const program = new EventEmitter();
 
 async function main(){
 
   // Initialize Components
-  await navigationComponentInstallation({emitter:program});
+  //await navigationComponentInstallation({emitter:program});
   await loginComponentInstallation({emitter:program});
   await commandComponentInstallation({emitter:program});
 

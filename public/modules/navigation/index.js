@@ -39,10 +39,10 @@ export default async function install ({emitter}) {
               `).join('')}
               <div class="dropdown-divider"></div>
               ${context.locations.filter(location=>location.parent).map(location => `
-                <a class="dropdown-item" href="#" data-command="enter ${location.label}">&#x21b2;${location.label}</a>
+                <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21b2;</b> ${location.label}</a>
               `).join('')}
               ${context.locations.filter(location=>location.active).map(location => `
-                <a class="dropdown-item" href="#" data-command="enter ${location.label}">&#x21ba;${location.label}</a>
+                <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21ba;</b> ${location.label}</a>
               `).join('')}
 
 
