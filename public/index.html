@@ -22,7 +22,17 @@
   <body>
 
     <navigation-container>
-      <span slot="title">🍭 Fancy title</span>
+      <span slot="navbar-brand">🍭 Fancy title</span>
+
+      <span slot="dropdown">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+
+          </div>
+        </li>
+      </span>
+      
     </navigation-container>
 
     <template id="navigation-container">
@@ -32,7 +42,7 @@
       </style>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark ddddd-fixed-top">
      <a class="navbar-brand" href="#">
-         <slot name="title">XXX</slot>
+         <slot name="navbar-brand"></slot>
      </a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
@@ -49,14 +59,7 @@
          <li class="nav-item">
            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
          </li>
-         <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-           <div class="dropdown-menu" aria-labelledby="dropdown01">
-             <a class="dropdown-item" href="#">Action</a>
-             <a class="dropdown-item" href="#">Another action</a>
-             <a class="dropdown-item" href="#">Something else here</a>
-           </div>
-         </li>
+         <slot name="dropdown"></slot>
        </ul>
        <form class="form-inline my-2 my-lg-0">
          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

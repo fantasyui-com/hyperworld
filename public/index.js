@@ -1,6 +1,6 @@
 import loginComponentInstallation from '/modules/login/index.js';
 import commandComponentInstallation from '/modules/command/index.js';
-import navigationComponentInstallation from '/modules/navigation/index.js';
+//import navigationComponentInstallation from '/modules/navigation/index.js';
 
 import navigationContainer from '/modules/navigation-container/index.js';
 
@@ -12,6 +12,7 @@ async function main(){
   //await navigationComponentInstallation({emitter:program});
   await loginComponentInstallation({emitter:program});
   await commandComponentInstallation({emitter:program});
+  await navigationContainer({emitter:program});
 
   // Initialize Emitter Events
 
