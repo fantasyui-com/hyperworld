@@ -1,10 +1,9 @@
-import loginComponentInstallation from '/modules/login/index.js';
+//import loginComponentInstallation from '/modules/login/index.js';
 import commandComponentInstallation from '/modules/command/index.js';
 //import navigationComponentInstallation from '/modules/navigation/index.js';
 
+import loginComponent from '/modules/login-component/index.js';
 import navigationContainer from '/modules/navigation-container/index.js';
-import dropdownComponent from '/modules/dropdown-component/index.js';
-import listComponent from '/modules/list-component/index.js';
 
 const program = new EventEmitter();
 
@@ -12,28 +11,24 @@ async function main(){
 
   // Initialize Components
   //await navigationComponentInstallation({emitter:program});
-  await loginComponentInstallation({emitter:program});
+  //await loginComponentInstallation({emitter:program});
   await commandComponentInstallation({emitter:program});
 
+
   await navigationContainer({emitter:program});
-  await dropdownComponent({emitter:program});
-  await listComponent({emitter:program});
+  await loginComponent({emitter:program});
 
   // Initialize Emitter Events
 
 
   program.on('screen',(input)=>{
-
     const {format, type, ...packet} = input;
-
     console.info('Got a screen packet!', {format, type, packet})
-
     if(format === 'data'){
       program.emit(type, packet)
     }else{
       program.emit(format, packet)
     }
-
   });
 
 
@@ -42,6 +37,7 @@ async function main(){
   });
 
   program.on('*', e => console.log('Event', e) )
+  console.log('LOADED!')
   program.emit('loaded');
 
 
@@ -59,4 +55,6 @@ async function main(){
   program.on('command', (packet,response) => socket.emit('command', packet, response));
 
 } // main
-main();
+
+
+  main();

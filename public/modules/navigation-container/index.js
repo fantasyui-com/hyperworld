@@ -1,6 +1,9 @@
 import BootstrapElement from '/modules/bootstrap-element/index.js';
 
-export default function ({emitter}){
+import dropdownComponent from './modules/dropdown-component/index.js';
+import listComponent from './modules/list-component/index.js';
+
+export default async function ({emitter}){
 
   // Create a class for the element
   class NavigationContainer extends BootstrapElement {
@@ -60,6 +63,10 @@ export default function ({emitter}){
     }
   }
 
+
   customElements.define('navigation-container', NavigationContainer);
+  
+  await dropdownComponent({emitter});
+  await listComponent({emitter});
 
 }
