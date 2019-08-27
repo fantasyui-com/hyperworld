@@ -4,6 +4,8 @@ Virtual World of Objects.
 ![screenshot](screenshot.png)
 ![screenshot-conversation](screenshot-conversation.png)
 ![screenshot-browser](screenshot-browser.png)
+![screenshot-login](screenshot-login.png)
+![screenshot-command](screenshot-command.png)
 
 ## World Structure
 
