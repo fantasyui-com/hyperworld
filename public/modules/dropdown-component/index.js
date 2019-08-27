@@ -3,8 +3,7 @@ import BootstrapElement from '/modules/bootstrap-element/index.js';
 export default function ({emitter}){
 
   // Create a class for the element
-  class NavigationContainer extends BootstrapElement {
-
+  class DropdownComponent extends BootstrapElement {
     // Specify observed attributes so that
     // attributeChangedCallback will work
     static get observedAttributes() {
@@ -14,7 +13,10 @@ export default function ({emitter}){
     constructor() {
       // Always call super first in constructor
       super();
-      this.template = '#navigation-container';
+      this.template = '#dropdown-component';
+
+      this.dropdownMenu = this.querySelector(":scope .dropdown-menu");
+
       this.dataEventHandler = (i)=>this.updateUI(i);
       this.updateAttr()
     }
@@ -26,8 +28,7 @@ export default function ({emitter}){
     }
 
     updateUI(context) {
-      const dropdownNode = this.querySelector(":scope *[slot=dropdown] .dropdown-menu")
-      dropdownNode.innerHTML = `
+      this.dropdownMenu.innerHTML = `
         ${context.locations.filter(location=>!location.parent).filter(location=>!location.active).map(location => `
           <a class="dropdown-item" href="#" data-command="enter ${location.label}">${location.label}</a>
         `).join('')}
@@ -60,6 +61,5 @@ export default function ({emitter}){
     }
   }
 
-  customElements.define('navigation-container', NavigationContainer);
-
+  customElements.define('dropdown-component', DropdownComponent);
 }

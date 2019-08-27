@@ -3,6 +3,8 @@ import commandComponentInstallation from '/modules/command/index.js';
 //import navigationComponentInstallation from '/modules/navigation/index.js';
 
 import navigationContainer from '/modules/navigation-container/index.js';
+import dropdownComponent from '/modules/dropdown-component/index.js';
+import listComponent from '/modules/list-component/index.js';
 
 const program = new EventEmitter();
 
@@ -12,7 +14,10 @@ async function main(){
   //await navigationComponentInstallation({emitter:program});
   await loginComponentInstallation({emitter:program});
   await commandComponentInstallation({emitter:program});
+
   await navigationContainer({emitter:program});
+  await dropdownComponent({emitter:program});
+  await listComponent({emitter:program});
 
   // Initialize Emitter Events
 

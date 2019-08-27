@@ -23,17 +23,36 @@
 
     <navigation-container>
       <span slot="navbar-brand">🍭 Fancy title</span>
-
-      <span slot="dropdown">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-
-          </div>
-        </li>
-      </span>
-      
+      <dropdown-component slot="dropdown">  <span slot="label">🍭 Fancy title</span></dropdown-component>
+      <list-component slot="list"/>
     </navigation-container>
+
+    <template id="dropdown-component">
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><slot name="label">More</slot></a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      </ul>
+    </template>
+
+    <template id="list-component">
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+      </ul>
+    </template>
 
     <template id="navigation-container">
       <style>
@@ -49,19 +68,11 @@
      </button>
 
      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-       <ul class="navbar-nav mr-auto">
-         <li class="nav-item active">
-           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#">Link</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-         </li>
-         <slot name="dropdown"></slot>
-       </ul>
-       <form class="form-inline my-2 my-lg-0">
+
+       <slot name="list"></slot>
+       <slot name="dropdown"></slot>
+
+       <form class="form-inline my-2 my-lg-0 ml-auto">
          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
        </form>
