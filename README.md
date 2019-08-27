@@ -1,4 +1,4 @@
-# hyperworld
+# HyperWorld OOP Language
 Virtual World of Objects.
 
 ![screenshot](screenshot.png)
@@ -13,3 +13,8 @@ Virtual World of Objects.
 
 ## Developer Notes
 Custom Element's Sub Elements must be registered AFTER the Main Custom Element calls customElements.define(...);
+
+## Press
+- Project name is: HyperWorld (One word, both Hyper and World are capitalized)
+- NPM Location:
+- GitHub Location: 

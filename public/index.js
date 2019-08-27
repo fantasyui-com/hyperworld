@@ -4,43 +4,42 @@ import commandComponentInstallation from '/modules/command/index.js';
 
 import loginComponent from '/modules/login-component/index.js';
 import navigationContainer from '/modules/navigation-container/index.js';
+import loaderComponent from '/modules/loader-component/index.js';
 
-const program = new EventEmitter();
+const emitter = new EventEmitter();
 
 async function main(){
 
   // Initialize Components
-  //await navigationComponentInstallation({emitter:program});
-  //await loginComponentInstallation({emitter:program});
-  await commandComponentInstallation({emitter:program});
 
-
-  await navigationContainer({emitter:program});
-  await loginComponent({emitter:program});
+  await loaderComponent({emitter});
+  await navigationContainer({emitter});
+  await loginComponent({emitter});
 
   // Initialize Emitter Events
 
 
-  program.on('screen',(input)=>{
+  emitter.on('screen',(input)=>{
     const {format, type, ...packet} = input;
     console.info('Got a screen packet!', {format, type, packet})
     if(format === 'data'){
-      program.emit(type, packet)
+      emitter.emit(type, packet)
     }else{
-      program.emit(format, packet)
+      emitter.emit(format, packet)
     }
   });
 
 
-  program.on('loaded',()=>{
-   program.emit('login-show')
+  emitter.on('loaded',()=>{
+   emitter.emit('login-show')
   });
 
-  program.on('*', e => console.log('Event', e) )
-  console.log('LOADED!')
-  program.emit('loaded');
+  emitter.on('authenticated',()=>{
+   emitter.emit('command', {command:'nav'})
+  });
 
-
+  emitter.on('*', e => console.log('Event', e) )
+  emitter.emit('loaded');
 
   // Initialize Server Communication
   const socket = io('http://localhost:3000');
@@ -48,11 +47,24 @@ async function main(){
   // Packet Forwarding
   // Please, packet forwarding only, this must be easy to read.
   socket.on('connect', () => {
-    socket.on('screen', packet => program.emit('screen', packet));
+    socket.on('screen', packet => emitter.emit('screen', packet));
+    socket.on('authenticated', packet => emitter.emit('authenticated', packet));
   });
 
-  program.on('server-login', (packet,response) => socket.emit('server-login', packet, response));
-  program.on('command', (packet,response) => socket.emit('command', packet, response));
+  emitter.on('server-login', (packet,response) => socket.emit('server-login', packet, response));
+  emitter.on('command', (packet, response) => socket.emit('command', packet, response));
+  //
+  // document.body.addEventListener("click", event => {
+  //   try{
+  //     const command = event.target.dataset.command;
+  //     if(command) emitter.emit('command', {command})
+  //   }catch(error){
+  //     console.error(error)
+  //   }
+  // });
+
+  document.body.addEventListener("click", ({target:{dataset:{command}}}) => command?emitter.emit('command', {command}):0 );
+
 
 } // main
 

@@ -1,6 +1,6 @@
 import BootstrapElement from '/modules/bootstrap-element/index.js';
 
-export default function ({emitter}){
+export default async function ({emitter}){
 
   // Create a class for the element
   class LoginComponent extends BootstrapElement {
@@ -27,7 +27,7 @@ export default function ({emitter}){
       emitter.on('login-message',(text)=>{
         $('#loginModal .alert .message').text(text)
       });
-
+      
       document.getElementById('login-form')
       .addEventListener('submit', function(event) {
 

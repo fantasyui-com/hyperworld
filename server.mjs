@@ -35,10 +35,12 @@ async function main(){
       socket.on('server-login', async function({username, password}, respond){
 
         const login = await world.login(username, password);
+
         if(login){
           respond({success:true})
           session = await world.session(username, password);
           session.socket = socket;
+          socket.emit('authenticated', {});
         }else{
           respond({success:false, text:'Login failed.'})
           return;
@@ -54,7 +56,7 @@ async function main(){
         //await world.showPrompt();
         socket.on('command', async function(packet, respond){
           await session.user.avatar.command(packet.command);
-          // socket.emit(response);
+
         });
 
       });

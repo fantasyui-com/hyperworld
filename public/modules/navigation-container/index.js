@@ -17,6 +17,7 @@ export default async function ({emitter}){
     constructor() {
       // Always call super first in constructor
       super();
+      //this.style.display = "none";
       this.template = '#navigation-container';
       this.dataEventHandler = (i)=>this.updateUI(i);
       this.updateAttr()
@@ -42,6 +43,7 @@ export default async function ({emitter}){
           <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21ba;</b> ${location.label}</a>
         `).join('')}
       `;
+      this.style.display = "block";
     }
 
     connectedCallback() {
@@ -65,7 +67,7 @@ export default async function ({emitter}){
 
 
   customElements.define('navigation-container', NavigationContainer);
-  
+
   await dropdownComponent({emitter});
   await listComponent({emitter});
 
