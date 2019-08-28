@@ -3,7 +3,7 @@ import BootstrapElement from '/modules/bootstrap-element/index.js';
 export default async function ({emitter}){
 
   // Create a class for the element
-  class LoginComponent extends BootstrapElement {
+  class CommandComponent extends BootstrapElement {
     // Specify observed attributes so that
     // attributeChangedCallback will work
     static get observedAttributes() {
@@ -13,40 +13,21 @@ export default async function ({emitter}){
     constructor() {
       // Always call super first in constructor
       super();
-      this.template = '#login-component';
+      this.template = '#navigation-command-component';
 
-      this.message = this.querySelector(":scope .message");
+      this.commandForm = this.querySelector(":scope form");
 
-      emitter.on('login-show',()=>{
-        console.log('Got login-show')
-        $('#loginModal').modal({})
-      });
-      emitter.on('login-hide',()=>{
-        $('#loginModal').modal('hide')
-      });
-      emitter.on('login-message',(text)=>{
-        $('#loginModal .alert .message').text(text)
-      });
-
-      document.getElementById('login-form')
-      .addEventListener('submit', function(event) {
+      this.commandForm
+      .addEventListener('submit', (event) => {
 
         event.preventDefault();
-        const formData = new FormData(document.getElementById('login-form'));
+        const formData = new FormData(  this.commandForm );
         const packet = {};
         for (const [key,value] of formData){
           packet[key] = value;
         }
-
-        emitter.emit('server-login', packet, function (response) {
-          if(response.success){
-            // the job of login box is now done.
-            emitter.emit('login-hide');
-            // other events will send in UI.
-          }else{
-            emitter.emit('login-message', response.text);
-          }
-        });
+        console.log(packet)
+        emitter.emit('command', packet);
 
       }); // submit
 
@@ -62,7 +43,7 @@ export default async function ({emitter}){
     }
 
     updateUI(context) {
-      this.message.innerHTML = ``;
+      //this.message.innerHTML = ``;
     }
 
     connectedCallback() {
@@ -84,5 +65,5 @@ export default async function ({emitter}){
     }
   }
 
-  customElements.define('login-component', LoginComponent);
+  customElements.define('navigation-command-component', CommandComponent);
 }

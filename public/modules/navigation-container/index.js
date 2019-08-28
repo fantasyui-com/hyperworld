@@ -2,6 +2,7 @@ import BootstrapElement from '/modules/bootstrap-element/index.js';
 
 import dropdownComponent from './modules/dropdown-component/index.js';
 import listComponent from './modules/list-component/index.js';
+import commandComponent from './modules/command-component/index.js';
 
 export default async function ({emitter}){
 
@@ -70,5 +71,6 @@ export default async function ({emitter}){
 
   await dropdownComponent({emitter});
   await listComponent({emitter});
+  await commandComponent({emitter});
 
 }

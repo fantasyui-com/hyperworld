@@ -12,6 +12,7 @@ export default class BootstrapElement extends HTMLElement {
 
   // helper function
   interpolation(){
+    const debug = 0;
     // template refers to <template></template>
     // context refers to stuff inside <your-custom-element>  <span slot="bork">🍭</span> </your-custom-element>
     // overall flow of operation translates to YOUR-HTML = TEMPLATE(CONTEXT)
@@ -19,7 +20,13 @@ export default class BootstrapElement extends HTMLElement {
     const template = new Map( Array.from(this.querySelectorAll('slot').values()).map(i=>[i.name, i]) );
     // an array of [[name, element]] where name is the slot attribute of html element <span slot="bork">🍭</span>
     const context = Array.from(this.querySelectorAll(':scope > *[slot]').values()).map(i=>[i.slot, i]) ;
-    console.log(context)
+    //console.log(context)
+    if(debug) {
+      console.info(`BootstrapElement: Found ${template.size} <slots>: ${Array.from(template).map(i=>i[0]).join(', ')}.`)
+    }
+    if(debug) {
+      console.info(`BootstrapElement: Found ${context.length} <* slot="">: ${context.map(i=>i[0]).join(', ')}.`)
+    }
     // traverse context, the list of elements with slot="*" property
     // name is taken from context (see above)
     // element is the thing we want to replace <slot> with
@@ -27,7 +34,10 @@ export default class BootstrapElement extends HTMLElement {
       // slot is the <slot name="bork"> referenced by <span slot="bork">🍭</span> inside your custom element
       const slot = template.get(slotName);
       // if template had the slot bork, replace the entire  <slot name="bork">*</slot> with <span slot="bork">🍭</span>
-      if(slot) slot.parentElement.replaceChild( element, slot ); // Syntax: replacedNode = parentNode.replaceChild(newChild, oldChild);
+      if(slot) {
+        slot.parentElement.replaceChild( element, slot ); // Syntax: replacedNode = parentNode.replaceChild(newChild, oldChild);
+        if(debug) console.info(`BootstrapElement: Installing ${slotName}`)
+      }
       // remove the remove slot="bork" from  <span slot="bork">🍭</span>
       // NOTE: THIS IS NON SPEC, YOU SHOULD COMMENT THIS OUT FOR FUTURE COMPAT
       // element.removeAttribute('slot');

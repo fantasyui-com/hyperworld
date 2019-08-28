@@ -22,3 +22,7 @@ Virtual World of Objects.
 - Project name is: HyperWorld (One word, both Hyper and World are capitalized)
 - NPM Location: https://www.npmjs.com/package/hyperworld
 - GitHub Location: https://github.com/fantasyui-com/hyperworld#readme
+
+## Administration
+- Define Components before defining sub Components
+- do not use shorthand ```<tag/>``` use the full thing.

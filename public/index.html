@@ -24,14 +24,18 @@
   </head>
   <body>
 
-    <!-- GUI Section -->
+    <!-- GUI Section
+    NOTE: You must use <tag></tag>, you can't use <tag/>
+    -->
 
-    <login-component/>
+    <login-component></login-component>
     <navigation-container>
       <span slot="navbar-brand">HyperWorld Administrator</span>
       <navigation-dropdown-component slot="dropdown"><span slot="label">More</span></navigation-dropdown-component>
-      <navigation-list-component slot="list"/>
+      <navigation-list-component slot="list"></navigation-list-component>
+      <navigation-command-component slot="command" class="my-2 my-lg-0 ml-auto"></navigation-command-component>
     </navigation-container>
+
 
     <main role="main" class="container">
       <loader-component></loader-component>
@@ -165,6 +169,13 @@
 
     <!-- Templates & Script Section -->
 
+    <template id="navigation-command-component">
+      <form id="command-form" class="form-inline">
+        <input name="command" class="form-control mr-sm-2" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Run</button>
+      </form>
+    </template>
+
     <template id="login-component">
       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -240,10 +251,7 @@
        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
          <slot name="list"></slot>
          <slot name="dropdown"></slot>
-         <form class="form-inline my-2 my-lg-0 ml-auto">
-           <input class="form-control mr-sm-2" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
-           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Run</button>
-         </form>
+         <slot name="command"></slot>
        </div>
       </nav>
     </template>
