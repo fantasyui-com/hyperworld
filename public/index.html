@@ -28,14 +28,140 @@
 
     <login-component/>
     <navigation-container>
-      <span slot="navbar-brand">HyperWorld</span>
-      <navigation-dropdown-component slot="dropdown">  <span slot="label">More</span></navigation-dropdown-component>
+      <span slot="navbar-brand">HyperWorld Administrator</span>
+      <navigation-dropdown-component slot="dropdown"><span slot="label">More</span></navigation-dropdown-component>
       <navigation-list-component slot="list"/>
     </navigation-container>
 
     <main role="main" class="container">
-      <loader-component/>
+      <loader-component></loader-component>
+
+      <div class="grid">
+
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-dark d-block" style="width: 293px;">
+            <img src="faces/a.png" class="card-img-top" alt="Face">
+
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+            <div class="card-footer">
+              Quote
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-dark d-block" style="width: 293px;">
+            <img src="faces/b.png" class="card-img-top" alt="Face">
+
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+            <div class="card-footer">
+              Quote
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-dark d-block" style="width: 293px;">
+            <img src="faces/c.png" class="card-img-top" alt="Face">
+
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+            <div class="card-footer">
+              Quote
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-dark d-block" style="width: 293px;">
+            <img src="faces/d.png" class="card-img-top" alt="Face">
+
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+            <div class="card-footer">
+              Quote
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-info d-block" style="width: 293px;">
+            <div class="card-header">
+              Quote
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-info d-block" style="width: 293px;">
+            <div class="card-header">
+              Quote
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-info d-block" style="width: 293px;">
+            <div class="card-header">
+              Quote
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-item p-1 pb-3">
+          <div class="card text-white bg-info d-block" style="width: 293px;">
+            <div class="card-header">
+              Quote
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </main>
+
 
     <!-- Templates & Script Section -->
 
@@ -128,6 +254,15 @@
     <script src="https://unpkg.com/wolfy87-eventemitter/EventEmitter.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script  type="module" src="index.js"></script>
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script>
+      $('.grid').masonry({
+      // options
+      itemSelector: '.grid-item',
+      columnWidth: 100
+      });
+    </script>
 
   </body>
 </html>
