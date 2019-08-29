@@ -5,6 +5,7 @@ import commandComponentInstallation from '/modules/command/index.js';
 import loginComponent from '/modules/login-component/index.js';
 import navigationContainer from '/modules/navigation-container/index.js';
 import loaderComponent from '/modules/loader-component/index.js';
+import alertComponent from '/modules/alert-component/index.js';
 
 const emitter = new EventEmitter();
 
@@ -15,6 +16,7 @@ async function main(){
   await loaderComponent({emitter});
   await navigationContainer({emitter});
   await loginComponent({emitter});
+  await alertComponent({emitter});
 
   // Initialize Emitter Events
 
@@ -22,8 +24,28 @@ async function main(){
   emitter.on('screen',(input)=>{
     const {format, type, ...packet} = input;
     console.info('Got a screen packet!', {format, type, packet})
+
     if(format === 'data'){
       emitter.emit(type, packet)
+    }else if(format === 'print'){
+
+      // emitter.emit('alert', packet)
+      const html = `
+      <alert-component type="${packet.kind}">
+        <span slot="title">Alert!</span>
+        <span slot="text">${packet.text}</span>
+        <span slot="note">@${packet.username}</span>
+      </alert-component>
+      `;
+
+      document.querySelector('#main')
+      .insertAdjacentHTML('beforeend', html);
+
+      //
+      // const robotMessage = document.createElement("alert-component");
+      // this.querySelector('#main').append(robotMessage);
+
+
     }else{
       emitter.emit(format, packet)
     }

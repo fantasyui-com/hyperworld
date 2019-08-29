@@ -26,3 +26,9 @@ Virtual World of Objects.
 ## Administration
 - Define Components before defining sub Components
 - do not use shorthand ```<tag/>``` use the full thing.
+
+## Notes
+
+- robotiq
+- <script src="https://unpkg.com/lit-html/lit-html.js"></script>
+- z circle ui
