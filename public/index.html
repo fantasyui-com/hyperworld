@@ -8,16 +8,59 @@
     <meta name="generator" content="https://github.com/fantasyui-com">
     <title>Hyperworld</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <style>
+
+    :root {
+      --blue: #007bff;
+      --indigo: #6610f2;
+      --purple: #6f42c1;
+      --pink: #e83e8c;
+      --red: #ee5f5b;
+      --orange: #fd7e14;
+      --yellow: #f89406;
+      --green: #62c462;
+      --teal: #20c997;
+      --cyan: #5bc0de;
+      --white: #fff;
+
+      --gray: #7A8288;
+      --gray-dark: #3A3F44;
+
+      --primary: #3A3F44;
+      --secondary: #7A8288;
+      --success: #62c462;
+      --info: #5bc0de;
+      --warning: #f89406;
+      --danger: #ee5f5b;
+
+      --lighter: #e9ecef;
+      --light: #c7cacd;
+      --dark: #272B30;
+      --darker: #1f2228;
+
+      --breakpoint-xs: 0;
+      --breakpoint-sm: 576px;
+      --breakpoint-md: 768px;
+      --breakpoint-lg: 992px;
+      --breakpoint-xl: 1200px;
+
+      --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --border-radius: .25rem;
+    }
+
     html {
-      font-size: 14px;
+      font-family: var(--font-family-sans-serif);
+      line-height: 1.15;
     }
-    navigation-container {
-      display: none
+
+    body {
+      background-color: var(--gray-dark);
     }
+
+
+
     </style>
 
 
@@ -27,19 +70,31 @@
     <!-- GUI Section
     NOTE: You must use <tag></tag>, you can't use <tag/>
     -->
-
+<!--
     <login-component></login-component>
     <navigation-container>
       <span slot="navbar-brand">HyperWorld Administrator</span>
       <navigation-dropdown-component slot="dropdown"><span slot="label">More</span></navigation-dropdown-component>
       <navigation-list-component slot="list"></navigation-list-component>
-      <navigation-command-component slot="command" class="my-2 my-lg-0 ml-auto"></navigation-command-component>
+      <command-component slot="command" class="my-2 my-lg-0 ml-auto"></command-component>
     </navigation-container>
 
 
-    <loader-component></loader-component>
+    <loader-component></loader-component> -->
+
+    <navigation-container>
+      <span slot="brand">HyperWorld Administrator</span>
+      <links-component slot="links"></links-component>
+      <command-component slot="command"></command-component>
+    </navigation-container>
+
     <main id="main" role="main" class="container">
 
+      <alert-component>
+        <span slot="title">HyperWorld Administrator</span>
+        <span slot="text">Welcome to HyperWorld</span>
+        <span slot="note">Please, register or login.</span>
+      </alert-component>
 
 
 
@@ -48,10 +103,50 @@
 
     <!-- Templates & Script Section -->
 
-    <template id="navigation-command-component">
-      <form id="command-form" class="form-inline">
-        <input name="command" class="form-control mr-sm-2" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Run</button>
+    <template id="command-component">
+      <style>
+        form {
+          display: inline-block;
+          float: right;
+        }
+        input {
+          vertical-align: middle;
+          padding: .375rem .75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          border: 1px solid var(--cyan);
+          border-radius: .25rem;
+          background-color: transparent;
+          color: var(--cyan);
+        }
+
+        button::-moz-focus-inner {
+          border-color: transparent;
+        }
+        button:hover {
+          background-color: var(--cyan);
+          color: var(--dark);
+        }
+        button:active {
+          border-color: var(--orange);
+          background-color: var(--yellow);
+          color: var(--light);
+        }
+        button {
+          text-align: center;
+          vertical-align: middle;
+          padding: .375rem .75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          border: 1px solid var(--cyan);
+          border-radius: var(--border-radius);
+          background-color: transparent;
+          color: var(--cyan);
+        }
+      </style>
+      <form name="command-form">
+        <input name="command" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
+        <button type="submit">Run</button>
       </form>
     </template>
 
@@ -93,60 +188,89 @@
     </template>
 
     <template id="alert-component">
-      <div class="alert" role="alert">
-        <h4 class="alert-heading"><slot name="title"></slot></h4>
+      <style>
+      div {
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+      }
+      </style>
+
+      <div>
+        <h4><slot name="title"></slot></h4>
         <p><slot name="text"></slot></p>
         <hr>
-        <p class="mb-0"><slot name="note"></slot></p>
+        <p><slot name="note"></slot></p>
       </div>
     </template>
 
-    <template id="navigation-dropdown-component">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><slot name="label">More</slot></a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+    <template id="links-component">
+      <style>
+        ul {
+          padding: 1rem;
+          font-family: var(--font-family-sans-serif);
+          line-height: 1.15;
+          display: inline-block;
+        }
+        ul li {
+          display: inline-block;
+          padding-right: 1rem;
+          list-style: none;
+        }
+        a {
+          color: var(--light);
+          text-decoration: none;
+        }
+      </style>
+      <ul>
+        <li>
+          <a href="#">Home</a>
         </li>
-      </ul>
-    </template>
-
-    <template id="navigation-list-component">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <li>
+          <a href="#">Exit</a>
         </li>
       </ul>
     </template>
 
     <template id="navigation-container">
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark ddddd-fixed-top">
-       <a class="navbar-brand" href="#">
-           <slot name="navbar-brand"></slot>
-       </a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-         <slot name="list"></slot>
-         <slot name="dropdown"></slot>
-         <slot name="command"></slot>
-       </div>
+      <style>
+        nav {
+          font-family: var(--font-family-sans-serif);
+          line-height: 1.15;
+          padding: 1rem;
+          border-radius: 4px;
+
+          color: var(--light);
+          border: 1px solid var(--darker);
+          background-color: var(--dark);
+
+          /* offset-x | offset-y | blur-radius | spread-radius | color */
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+          /* filter: contrast(175%) brightness(103%) */
+        }
+        li {
+          display: inline-block;
+          list-style: none
+        }
+        a {
+          color: var(--light);
+          text-decoration: none;
+        }
+
+      </style>
+      <nav>
+       <span class="brand">
+         <slot name="brand"></slot>
+       </span>
+       <slot name="links"></slot>
+       <slot name="dropdown"></slot>
+       <slot name="command"></slot>
       </nav>
     </template>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/wolfy87-eventemitter/EventEmitter.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script  type="module" src="index.js"></script>

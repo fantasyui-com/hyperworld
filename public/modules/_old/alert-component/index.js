@@ -3,7 +3,7 @@ import BootstrapElement from '/modules/bootstrap-element/index.js';
 export default async function ({emitter}){
 
   // Create a class for the element
-  class CommandComponent extends BootstrapElement {
+  class AlertComponent extends BootstrapElement {
     // Specify observed attributes so that
     // attributeChangedCallback will work
     static get observedAttributes() {
@@ -13,27 +13,26 @@ export default async function ({emitter}){
     constructor() {
       // Always call super first in constructor
       super();
-      this.template = '#navigation-command-component';
+      this.template = '#alert-component';
 
-      this.commandForm = this.querySelector(":scope form");
+      this.alertSelector = this.querySelector(":scope .alert");
+      const type = this.getAttribute('type')||'info';
+      const typeClass = `alert-${type}`;
+      this.alertSelector.classList.add(typeClass);
 
-      this.commandForm
-      .addEventListener('submit', (event) => {
+      //console.log('Alert Type',type)
 
-        event.preventDefault();
-        const formData = new FormData(  this.commandForm );
-        const packet = {};
-        for (const [key,value] of formData){
-          packet[key] = value;
-        }
-        console.log(packet)
-        emitter.emit('command', packet);
 
-      }); // submit
-
+      this.titleSelector = this.querySelector(":scope slot[name=title]");
+      this.textSelector = this.querySelector(":scope slot[name=text]");
+      this.noteSelector = this.querySelector(":scope slot[name=note]");
 
       this.dataEventHandler = (i)=>this.updateUI(i);
       this.updateAttr()
+
+      emitter.on('authenticated',()=>{
+        this.style.display = "none";
+      })
     }
 
     updateAttr() {
@@ -43,7 +42,7 @@ export default async function ({emitter}){
     }
 
     updateUI(context) {
-      //this.message.innerHTML = ``;
+      // this.progressBar.innerHTML = ``;
     }
 
     connectedCallback() {
@@ -65,5 +64,5 @@ export default async function ({emitter}){
     }
   }
 
-  customElements.define('navigation-command-component', CommandComponent);
+  customElements.define('alert-component', AlertComponent);
 }

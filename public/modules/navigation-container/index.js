@@ -1,13 +1,7 @@
-import BootstrapElement from '/modules/bootstrap-element/index.js';
-
-import dropdownComponent from './modules/dropdown-component/index.js';
-import listComponent from './modules/list-component/index.js';
-import commandComponent from './modules/command-component/index.js';
-
 export default async function ({emitter}){
 
   // Create a class for the element
-  class NavigationContainer extends BootstrapElement {
+  class NavigationContainer extends HTMLElement {
 
     // Specify observed attributes so that
     // attributeChangedCallback will work
@@ -15,23 +9,42 @@ export default async function ({emitter}){
       return ['event-name', 'flarp'];
     }
 
-    constructor() {
-      // Always call super first in constructor
-      super();
-      //this.style.display = "none";
-      this.template = '#navigation-container';
-      this.dataEventHandler = (i)=>this.updateUI(i);
+    constructor(...args) {
+      const self = super(...args);
+
+      // Hide by deafult
+      // this.style.display = "none";
+
+      // Load Template
+      // Templating related information
+      const templateSelector = '#navigation-container';
+      const template = document.querySelector(templateSelector);
+      const templateContent = template.content;
+
+      // Attach Shadow
+      this.attachShadow({mode: 'open'});
+      this.shadowRoot.appendChild(templateContent.cloneNode(true));
+
+      // when attributtes change...
+      // This is for when observedAttributes triggers updateAttr,
+      // the listener that previously listened to incommingDataName will be destroyed
+      // and a new listener binding to incommingDataFunction will be assigned under the new name
+      this.incommingDataName = 'navigation';
+      this.incommingDataFunction = (i)=>this.updateUI(i);
       this.updateAttr()
+
+      return self;
     }
 
     updateAttr() {
-      if(this.dataEventName) emitter.removeListener(this.dataEventName, this.dataEventHandler)
-      this.dataEventName = this.getAttribute('event-name') || 'navigation';
-      if(this.dataEventName) emitter.on(this.dataEventName, this.dataEventHandler );
+      if(this.incommingDataName) emitter.removeListener(this.incommingDataName, this.incommingDataFunction)
+      this.incommingDataName = this.getAttribute('event-name') || 'navigation';
+      if(this.incommingDataName) emitter.on(this.incommingDataName, this.incommingDataFunction );
     }
 
     updateUI(context) {
-      const dropdownNode = this.querySelector(":scope *[slot=dropdown] .dropdown-menu")
+      const dropdownNode = this.shadowRoot.querySelector(":scope *[slot=dropdown] .dropdown-menu")
+
       dropdownNode.innerHTML = `
         ${context.locations.filter(location=>!location.parent).filter(location=>!location.active).map(location => `
           <a class="dropdown-item" href="#" data-command="enter ${location.label}">${location.label}</a>
@@ -69,8 +82,5 @@ export default async function ({emitter}){
 
   customElements.define('navigation-container', NavigationContainer);
 
-  await dropdownComponent({emitter});
-  await listComponent({emitter});
-  await commandComponent({emitter});
 
 }

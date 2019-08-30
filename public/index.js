@@ -1,10 +1,17 @@
 //import loginComponentInstallation from '/modules/login/index.js';
-import commandComponentInstallation from '/modules/command/index.js';
+//import commandComponentInstallation from '/modules/command/index.js';
 //import navigationComponentInstallation from '/modules/navigation/index.js';
 
-import loginComponent from '/modules/login-component/index.js';
+//import loginComponent from '/modules/login-component/index.js';
+//import loaderComponent from '/modules/loader-component/index.js';
+
+//import dropdownComponent from './modules/dropdown-component/index.js';
+
 import navigationContainer from '/modules/navigation-container/index.js';
-import loaderComponent from '/modules/loader-component/index.js';
+
+  import linksComponent from './modules/links-component/index.js';
+  import commandComponent from './modules/command-component/index.js';
+
 import alertComponent from '/modules/alert-component/index.js';
 
 const emitter = new EventEmitter();
@@ -13,11 +20,15 @@ async function main(){
 
   // Initialize Components
 
-  await loaderComponent({emitter});
+  //await loaderComponent({emitter});
   await navigationContainer({emitter});
-  await loginComponent({emitter});
-  await alertComponent({emitter});
+  //-await loginComponent({emitter});
 
+  // await dropdownComponent({emitter});
+  await linksComponent({emitter});
+  await commandComponent({emitter});
+
+  await alertComponent({emitter});
   // Initialize Emitter Events
 
 
