@@ -10,11 +10,20 @@ Virtual World of Objects.
 
 ## World Structure
 - Universe is made up of Locations
+- Location contain interactive Agents/Robots
+
+## Interactive Components
+
+A world needs to engage the user, a robot may ask "How are you?: [Great!]/[Awful]", or "Do you want to schedule an appointment?: [Yes]/[No]"
+(note that questions are coupled with pre-set answers to sidestep parsing)
+A music player may print "Which song do you want to play? [Hey There]/[The Hork Song]" these are the fundamental OBJECTS in HyperWorld small
+stateful finite XML node driven state machines. Beyond that it is just Locations and Locations within Locations ad Infinitum.
 
 ## Developer Notes
 - Custom Element's Sub Elements must be registered AFTER the Main Custom Element calls customElements.define(...);
 
 ## Todo
+- Robot
 - Insert a command processor where the search box is
 - Initialize Robots - Robots are the Primary way of Interacting with System
 
