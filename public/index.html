@@ -52,6 +52,7 @@
 
     html {
       font-family: var(--font-family-sans-serif);
+      font-size: 12px;
       line-height: 1.15;
     }
 
@@ -115,7 +116,7 @@
           font-size: 1rem;
           line-height: 1.5;
           border: 1px solid var(--cyan);
-          border-radius: .25rem;
+          border-radius: var(--border-radius);
           background-color: transparent;
           color: var(--cyan);
         }
@@ -190,6 +191,11 @@
     <template id="alert-component">
       <style>
       div {
+        padding: 1rem;
+      }
+      article {
+        border-radius: var(--border-radius);
+        padding: 1rem;
         color: var(--light);
         border: 1px solid var(--darker);
         background-color: var(--dark);
@@ -197,14 +203,27 @@
         /* offset-x | offset-y | blur-radius | spread-radius | color */
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
       }
+      footer {
+        font-size: .8rem;
+      }
+      hr {
+        border: 1px solid var(--darker);
+      }
       </style>
 
       <div>
-        <h4><slot name="title"></slot></h4>
-        <p><slot name="text"></slot></p>
-        <hr>
-        <p><slot name="note"></slot></p>
+        <article class="card">
+          <header>
+            <h4><slot name="title"></slot></h4>
+          </header>
+          <p><slot name="text"></slot></p>
+          <hr>
+          <footer>
+            <p><slot name="note"></slot></p>
+          </footer>
+        </article>
       </div>
+
     </template>
 
     <template id="links-component">
@@ -241,7 +260,7 @@
           font-family: var(--font-family-sans-serif);
           line-height: 1.15;
           padding: 1rem;
-          border-radius: 4px;
+          border-radius: var(--border-radius);
 
           color: var(--light);
           border: 1px solid var(--darker);
