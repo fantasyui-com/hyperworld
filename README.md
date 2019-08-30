@@ -12,12 +12,21 @@ Virtual World of Objects.
 - Universe is made up of Locations
 - Location contain interactive Agents/Robots
 
-## Interactive Components
+## Interactive Components and the USE command
 
 A world needs to engage the user, a robot may ask "How are you?: [Great!]/[Awful]", or "Do you want to schedule an appointment?: [Yes]/[No]"
 (note that questions are coupled with pre-set answers to sidestep parsing)
 A music player may print "Which song do you want to play? [Hey There]/[The Hork Song]" these are the fundamental OBJECTS in HyperWorld small
 stateful finite XML node driven state machines. Beyond that it is just Locations and Locations within Locations ad Infinitum.
+
+Primary mode of interacting with State Machines is the use command.
+For example to log into the system the user will state:
+
+    use login machine
+
+To tweet from within the system the user can:
+
+    use twitter send 'I hate this.'
 
 ## Developer Notes
 - Custom Element's Sub Elements must be registered AFTER the Main Custom Element calls customElements.define(...);
