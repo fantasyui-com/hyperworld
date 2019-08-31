@@ -43,21 +43,21 @@ export default async function ({emitter}){
     }
 
     updateUI(context) {
-      const dropdownNode = this.shadowRoot.querySelector(":scope *[slot=dropdown] .dropdown-menu")
-
-      dropdownNode.innerHTML = `
-        ${context.locations.filter(location=>!location.parent).filter(location=>!location.active).map(location => `
-          <a class="dropdown-item" href="#" data-command="enter ${location.label}">${location.label}</a>
-        `).join('')}
-        <div class="dropdown-divider"></div>
-        ${context.locations.filter(location=>location.parent).map(location => `
-          <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21b2;</b> ${location.label}</a>
-        `).join('')}
-        ${context.locations.filter(location=>location.active).map(location => `
-          <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21ba;</b> ${location.label}</a>
-        `).join('')}
-      `;
-      this.style.display = "block";
+      // const dropdownNode = this.shadowRoot.querySelector(":scope *[slot=dropdown] .dropdown-menu")
+      //
+      // dropdownNode.innerHTML = `
+      //   ${context.locations.filter(location=>!location.parent).filter(location=>!location.active).map(location => `
+      //     <a class="dropdown-item" href="#" data-command="enter ${location.label}">${location.label}</a>
+      //   `).join('')}
+      //   <div class="dropdown-divider"></div>
+      //   ${context.locations.filter(location=>location.parent).map(location => `
+      //     <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21b2;</b> ${location.label}</a>
+      //   `).join('')}
+      //   ${context.locations.filter(location=>location.active).map(location => `
+      //     <a class="dropdown-item" href="#" data-command="enter ${location.label}"><b class="text-muted">&#x21ba;</b> ${location.label}</a>
+      //   `).join('')}
+      // `;
+      // this.style.display = "block";
     }
 
     connectedCallback() {

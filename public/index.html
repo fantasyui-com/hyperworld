@@ -38,12 +38,6 @@
       --dark: #272B30;
       --darker: #1f2228;
 
-      --breakpoint-xs: 0;
-      --breakpoint-sm: 576px;
-      --breakpoint-md: 768px;
-      --breakpoint-lg: 992px;
-      --breakpoint-xl: 1200px;
-
       --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -71,25 +65,17 @@
     <!-- GUI Section
     NOTE: You must use <tag></tag>, you can't use <tag/>
     -->
-<!--
-    <login-component></login-component>
-    <navigation-container>
-      <span slot="navbar-brand">HyperWorld Administrator</span>
-      <navigation-dropdown-component slot="dropdown"><span slot="label">More</span></navigation-dropdown-component>
-      <navigation-list-component slot="list"></navigation-list-component>
-      <command-component slot="command" class="my-2 my-lg-0 ml-auto"></command-component>
-    </navigation-container>
 
-
-    <loader-component></loader-component> -->
 
     <navigation-container>
-      <span style="grid-area: header1;" slot="brand">HyperWorld Administrator</span>
-      <links-component style="grid-area: header2;" slot="links"></links-component>
-      <command-component style="grid-area: header3;" slot="command"></command-component>
+      <span slot="brand">HyperWorld Administrator</span>
+      <links-component slot="links"></links-component>
+      <command-component slot="command"></command-component>
     </navigation-container>
 
     <main id="main" role="main" class="container">
+
+      <login-component></login-component>
 
       <alert-component>
         <span slot="title">HyperWorld Administrator</span>
@@ -152,46 +138,135 @@
     </template>
 
     <template id="login-component">
-      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Sign in</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form id="login-form" class="form-signin d-inline-block">
-            <div class="modal-body">
-                <label for="username" class="sr-only">Username</label>
-                <input type="text" id="username" name="username" class="form-control mb-2" placeholder="Username" required autofocus value="anonymous">
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control mb-2" placeholder="Password" required value="anonymous">
-              <div class="alert alert-info" role="alert">
-                <span class="message">Please enter your username and password.</span>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-    </template>
+      <style>
+      article {
+        padding: 1rem;
+      }
 
-    <template id="loader-component">
-      <div style="padding: 10em;">
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-        </div>
-      </div>
+      form {
+        border-radius: var(--border-radius);
+        padding: 1rem  1rem 0  1rem;
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+      }
+
+
+      section {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "label input";
+        align-items: center;
+
+      }
+
+      label {
+        justify-self: end;
+        grid-area: label;
+      }
+
+      input {
+        grid-area: input;
+      }
+
+      input {
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+        padding: .5rem;
+      }
+
+      button {
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--primary);
+        padding: .5rem;
+        border-radius: var(--border-radius);
+      }
+
+      label {
+        display: inline-block;
+        padding-right: 1rem;
+      }
+
+      @media (max-width: 575.98px) {
+        section {grid-template-columns: 100%; grid-template-areas: "input";}
+        label { display: none; }
+      }
+
+      /* Extra small devices (portrait phones, less than 576px) */
+      @media (min-width: 576px) and (max-width: 767.98px) {
+        section {
+          /*background-color: red;*/
+          grid-template-columns: 40% auto;
+        }
+      }
+
+      /* Small devices (landscape phones, less than 768px) */
+      @media (min-width: 768px) and (max-width: 991.98px) {
+        section {
+          /*background-color: green;*/
+          grid-template-columns: 30% auto;
+        }
+      }
+
+      /* Medium devices (tablets, less than 992px) */
+      @media (min-width: 992px) and (max-width: 1199.98px) {
+        section {
+          /*background-color: blue;*/
+          grid-template-columns: 20% auto;
+        }
+      }
+
+      /* Large devices (desktops, less than 1200px) */
+      @media (min-width: 1200px) {
+        section {
+          /*background-color: yellow;*/
+          grid-template-columns: 10% auto;
+        }
+      }
+
+
+
+
+
+
+
+
+      </style>
+      <article>
+        <form id="login-form" class="form-signin d-inline-block">
+
+          <section>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required autofocus value="anonymous">
+          </section>
+
+          <section>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" required value="anonymous">
+          </section>
+
+          <footer>
+            <p>
+              <span class="message">Please enter your username and password.</span>
+            </p>
+            <button type="submit">Sign in</button>
+          </footer>
+
+        </form>
+      <article>
     </template>
 
     <template id="alert-component">
       <style>
       div {
-        padding: 1rem;
+        padding: 1rem  1rem 0  1rem;
       }
       article {
         border-radius: var(--border-radius);
@@ -223,7 +298,6 @@
           </footer>
         </article>
       </div>
-
     </template>
 
     <template id="links-component">
@@ -233,6 +307,7 @@
           padding: 0;
           font-family: var(--font-family-sans-serif);
           line-height: 1.15;
+
           display: inline-block;
         }
         ul li {
@@ -258,103 +333,89 @@
     <template id="navigation-container">
       <style>
 
-
-      .item-a {
-        grid-area: header;
-      }
-      .item-b {
-        grid-area: main;
-      }
-      .item-c {
-        grid-area: sidebar;
-      }
-      .item-d {
-        grid-area: footer;
-      }
-
       nav {
         display: grid;
-        grid-template-columns: 25% 25% auto;
+        grid-template-columns: 25% auto 25%;
         grid-template-rows: auto;
-        grid-template-areas:
-          "header1 header2 header3"
-          "main main sidebar"
-          "footer footer footer";
+        grid-column-gap: 10px;
+        grid-row-gap: 15px;
+
+        font-family: var(--font-family-sans-serif);
+        line-height: 1.15;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+        /* filter: contrast(175%) brightness(103%) */
       }
 
+      li {
+        list-style: none
+      }
+
+      a {
+        color: var(--light);
+        text-decoration: none;
+      }
+
+      .header1 { grid-area: header1; }
+      .header2 { grid-area: header2; }
+      .header3 { grid-area: header3; }
+
+      @media (max-width: 1009.98px) {
+        .header1 { place-self: start; }
+        .header2 { place-self: start; }
+        .header3 { place-self: start; }
         nav {
-          font-family: var(--font-family-sans-serif);
-          line-height: 1.15;
-          padding: 1rem;
-          border-radius: var(--border-radius);
+          grid-template-columns: auto; /* one column*/
+          grid-template-areas: "header1" "header2" "header3"; /* three rows */
+        }
+      }
 
-          color: var(--light);
-          border: 1px solid var(--darker);
-          background-color: var(--dark);
+      @media (min-width: 1010px){
+        .header1 { place-self: start; }
+        .header2 { place-self: start; }
+        .header3 { place-self: end; }
+        nav {
+          grid-template-columns: 15% auto 35%; /* three columns */
+          grid-template-areas: "header1 header2 header3"; /* one row */
+        }
+      }
 
-          /* offset-x | offset-y | blur-radius | spread-radius | color */
-          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-          /* filter: contrast(175%) brightness(103%) */
-        }
-        li {
-          display: inline-block;
-          list-style: none
-        }
-        a {
-          color: var(--light);
-          text-decoration: none;
-        }
+
 
       </style>
+
       <nav>
-       <slot name="brand"></slot>
-       <slot name="links"></slot>
-       <slot name="dropdown"></slot>
-       <slot name="command"></slot>
-      </nav>
-    </template>
 
-
-    <template id="dnavigation-container">
-      <style>
-        nav {
-          font-family: var(--font-family-sans-serif);
-          line-height: 1.15;
-          padding: 1rem;
-          border-radius: var(--border-radius);
-
-          color: var(--light);
-          border: 1px solid var(--darker);
-          background-color: var(--dark);
-
-          /* offset-x | offset-y | blur-radius | spread-radius | color */
-          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-          /* filter: contrast(175%) brightness(103%) */
-        }
-        li {
-          display: inline-block;
-          list-style: none
-        }
-        a {
-          color: var(--light);
-          text-decoration: none;
-        }
-
-      </style>
-      <nav>
-       <span class="brand">
+       <section class="header1">
          <slot name="brand"></slot>
-       </span>
-       <slot name="links"></slot>
-       <slot name="dropdown"></slot>
-       <slot name="command"></slot>
+       </section>
+
+
+       <section class="header2">
+         <slot name="links"></slot>
+       </section>
+
+
+       <section class="header3">
+         <slot name="command"></slot>
+       </section>
+
       </nav>
+
     </template>
+
+
 
     <script src="https://unpkg.com/wolfy87-eventemitter/EventEmitter.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script  type="module" src="index.js"></script>
-
 
   </body>
 </html>
