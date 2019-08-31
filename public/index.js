@@ -30,12 +30,18 @@ async function main(){
   // Initialize Emitter Events
 
 
-  emitter.on('screen',(input)=>{
+  emitter.on('screen',(input, callback)=>{
     const {format, type, ...packet} = input;
     console.info('Got a screen packet!', {format, type, packet})
 
     if(format === 'data'){
       emitter.emit(type, packet)
+
+    }else if(format === 'input'){
+      // TODO: Print input element, attach a button, the button will trigger the attached callback
+    }else if(format === 'choice'){
+      // TODO: Print choice element, attach a button, the button will trigger the attached callback
+
     }else if(format === 'print'){
 
       // emitter.emit('alert', packet)
