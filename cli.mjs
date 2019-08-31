@@ -18,7 +18,9 @@ async function main(){
     const world = new HyperWorld(options);
     await world.initialize();
 
-    const session = await world.login(options.username, options.password);
+    const login = await world.login(options.username, options.password);
+    const session = await world.session(options.username, options.password);
+
     session.user.avatar.command('look');
     session.user.screen.prompt();
 
