@@ -40,7 +40,7 @@ async function main(){
 
       // emitter.emit('alert', packet)
       const html = `
-      <alert-component type="${packet.kind}">
+      <alert-component kind="${packet.kind}">
         <span slot="title">Alert!</span>
         <span slot="text">${packet.text}</span>
         <span slot="note">@${packet.username}</span>

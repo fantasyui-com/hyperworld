@@ -13,6 +13,13 @@ export default async function ({emitter}){
       this.shadowRoot.appendChild(templateContent.cloneNode(true));
 
       const alertBox = this.shadowRoot.querySelector('div');
+      const alertArticle = this.shadowRoot.querySelector('div article');
+
+      const kind = this.getAttribute('kind');
+      if(kind){
+        console.log(alertBox)
+        alertArticle.style.border = `1px solid var(--${kind})`;
+      }
 
       // For dismiss button:
       // alertBox.addEventListener('submit', (event) => {
