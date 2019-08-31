@@ -1,16 +1,11 @@
-//import loginComponentInstallation from '/modules/login/index.js';
-//import commandComponentInstallation from '/modules/command/index.js';
-//import navigationComponentInstallation from '/modules/navigation/index.js';
-
-//import loaderComponent from '/modules/loader-component/index.js';
-
-//import dropdownComponent from './modules/dropdown-component/index.js';
-
 import loginComponent from '/modules/login-component/index.js';
 import navigationContainer from '/modules/navigation-container/index.js';
 import linksComponent from './modules/links-component/index.js';
 import commandComponent from './modules/command-component/index.js';
 import alertComponent from '/modules/alert-component/index.js';
+import screenComponent from './modules/screen-component/index.js';
+
+import inputComponent from './modules/input-component/index.js';
 
 const emitter = new EventEmitter();
 
@@ -18,19 +13,23 @@ async function main(){
 
   // Initialize Components
 
-  //await loaderComponent({emitter});
+
   await navigationContainer({emitter});
   await loginComponent({emitter});
 
-  // await dropdownComponent({emitter});
   await linksComponent({emitter});
   await commandComponent({emitter});
 
   await alertComponent({emitter});
+  await screenComponent({emitter});
+
+  await inputComponent({emitter});
+
+
   // Initialize Emitter Events
 
-
-  emitter.on('screen',(input, callback)=>{
+  emitter.on('screen',(input, response)=>{
+    console.log('response',response);
     const {format, type, ...packet} = input;
     console.info('Got a screen packet!', {format, type, packet})
 
@@ -38,29 +37,11 @@ async function main(){
       emitter.emit(type, packet)
 
     }else if(format === 'input'){
-      // TODO: Print input element, attach a button, the button will trigger the attached callback
+      emitter.emit(format, packet, response);
     }else if(format === 'choice'){
-      // TODO: Print choice element, attach a button, the button will trigger the attached callback
-
+      emitter.emit(format, packet, response);
     }else if(format === 'print'){
-
-      // emitter.emit('alert', packet)
-      const html = `
-      <alert-component kind="${packet.kind}">
-        <span slot="title">Alert!</span>
-        <span slot="text">${packet.text}</span>
-        <span slot="note">@${packet.username}</span>
-      </alert-component>
-      `;
-
-      document.querySelector('#main')
-      .insertAdjacentHTML('beforeend', html);
-
-      //
-      // const robotMessage = document.createElement("alert-component");
-      // this.querySelector('#main').append(robotMessage);
-
-
+      emitter.emit(format, packet);
     }else{
       emitter.emit(format, packet)
     }
@@ -84,7 +65,7 @@ async function main(){
   // Packet Forwarding
   // Please, packet forwarding only, this must be easy to read.
   socket.on('connect', () => {
-    socket.on('screen', packet => emitter.emit('screen', packet));
+    socket.on('screen', (packet, response) => emitter.emit('screen', packet, response));
     socket.on('authenticated', packet => emitter.emit('authenticated', packet));
   });
 
