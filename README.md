@@ -2,6 +2,7 @@
 Virtual World of Objects.
 
 ![screenshot](screenshot.png)
+![screenshot-borders](screenshot-borders.png)
 ![screenshot-robots](screenshot-robots.png)
 ![screenshot-command](screenshot-command.png)
 ![screenshot-login](screenshot-login.png)
