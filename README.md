@@ -1,21 +1,76 @@
 # HyperWorld OOP Language
 Virtual World of Objects.
 
+## Program Architecture
+
+Program Interfaces / Clients
+- [Web Server](server.mjs)
+- [Command Line](cli.mjs)
+- [Module Import](index.mjs)
+
+Web Client
+
+- [Entry Point and Component Templates](public/index.html)
+- [Program](public/index.js)
+- [Shared Stylesheet](public/style.css)
+- Web Components
+  - [screen-component](public/modules/screen-component/index.js)
+    - [alert-component](public/modules/alert-component/index.js)
+    - [login-component](public/modules/login-component/index.js)
+    - AI Interface
+      - [input-component](public/modules/input-component/index.js)
+      - [select-component](public/modules/select-component/index.js)
+  - [navigation-container](public/modules/navigation-container/index.js)
+    - [links-component](public/modules/links-component/index.js)
+    - [command-component](public/modules/command-component/index.js)
+
+
+
+Class Structure
+
+- [Root](src/organization/index.mjs) - central access point
+  - .login(username, password)
+  - .session(?) - user session
+  - [Universe](src/organization/node_modules/Universe/index.mjs)
+    - .location(name) - finds a location by name (interface to map)
+    - .show() - displays a map of the universe (interface to map)
+    - [Map](src/organization/node_modules/Map/index.mjs) - loads and holds the universe map (xml)
+  - [Commands](src/organization/node_modules/Commands/index.mjs)
+    - .input(text)
+    - .completions()
+  - [Session](src/organization/node_modules/Session/index.mjs)
+    - [User](src/organization/node_modules/User/index.mjs)
+      - [Avatar](src/organization/node_modules/Avatar/index.mjs)
+      - .location - set get avatar location
+      - command() - parse user input text
+      - completions() - return a list of potential commands
+      - [Screen](src/organization/node_modules/Screen/index.mjs)
+        - .data(data) - You can send data
+        - .info(text) - Info
+        - .warning(text) - Warning
+        - .danger(text) - Danger
+        - .error(text) - Error
+        - .input(data) - Ask for text input
+        - .select(data) - Ask to select something
+        - .prompt(data) - print a prompt, especially in a terminal
+        - [JSON (Web)](src/organization/node_modules/Screen/Printer/Json.mjs) - Interface via Web
+        - [Enquirer (Terminal)](src/organization/node_modules/Screen/Printer/Enquirer.mjs) - Interface via Terminal
+
 ## GUI Screenshots - The Universal Interface
 
 The user interface is abstracted via [Screen Object](src/organization/node_modules/Screen/index.mjs)
 no extra steps are required to craft terminal or web interface.
 
-![web-and-terminal-ui-side-by-side.png](web-and-terminal-ui-side-by-side.png)
+![web-and-terminal-ui-side-by-side.png](docs/images/web-and-terminal-ui-side-by-side.png)
 
 ## Development Screenshots
-![screenshot](screenshot.png)
-![screenshot-borders](screenshot-borders.png)
-![screenshot-robots](screenshot-robots.png)
-![screenshot-command](screenshot-command.png)
-![screenshot-login](screenshot-login.png)
-![screenshot-browser](screenshot-browser.png)
-![screenshot-conversation](screenshot-conversation.png)
+![screenshot](docs/images/screenshot.png)
+![screenshot-borders](docs/images/screenshot-borders.png)
+![screenshot-robots](docs/images/screenshot-robots.png)
+![screenshot-command](docs/images/screenshot-command.png)
+![screenshot-login](docs/images/screenshot-login.png)
+![screenshot-browser](docs/images/screenshot-browser.png)
+![screenshot-conversation](docs/images/screenshot-conversation.png)
 
 ## World Structure
 - Universe is made up of Locations
@@ -26,7 +81,7 @@ no extra steps are required to craft terminal or web interface.
 
 When a robot asks a question, the question is paired with pre-set anwsers:
 For example: "How are you?: [Great!]/[Awful]", or "Do you want to schedule an appointment?: [Yes]/[No]"
-![processing-humans.png](processing-humans.png)
+![processing-humans.png](docs/images/processing-humans.png)
 
 ## Interactive Components and the USE command
 
@@ -57,6 +112,7 @@ To tweet from within the system the user can:
 
 ## Todo
 
+- Authentication
 - do not use shorthand ```<tag/>``` use the full <tag></tag> markup.
 - research z-circle-ui
 - robotiq state machine components

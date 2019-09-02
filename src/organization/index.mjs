@@ -25,18 +25,18 @@ export default class Root {
 
     await this.universe.initialize();
     await this.commands.initialize();
-    // console.log(registry)
+
     registry.universe.show();
+
   }
 
   async login(username, password){
-
+    // TODO: Authentication
     if(password.length == 1){
       return false
     }else{
       return true
     }
-
   }
 
   async session(username, password){
