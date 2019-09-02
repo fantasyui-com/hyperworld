@@ -19,7 +19,7 @@ export default async function ({emitter}){
       const content = this; // content is the custom element, but make sure you add slot=main to the thing you are injecting
 
       const injectInput = (context, response) => {
-        const html = `<input-component message="${context.message}" initial="${context.initial}"></input-component>`;
+        const html = `<input-component message="${context.message}" initial="${context.initial}" value-name="${context.name}"></input-component>`;
         const item = document.createElement("div");
         item.setAttribute('slot', 'main');
         item.innerHTML = html;

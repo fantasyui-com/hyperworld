@@ -12,9 +12,12 @@ export default async function ({emitter}){
       this.attachShadow({mode: 'open'});
       this.shadowRoot.appendChild(templateContent.cloneNode(true));
 
+      const valueName = this.getAttribute('value-name');
+
       const frmMain = this.shadowRoot.querySelector('form');
       const lblMain = frmMain.querySelector('form label');
       const txtMain = frmMain.querySelector('form input');
+      txtMain.name = valueName;
 
       lblMain.textContent = this.getAttribute('message');
       txtMain.value = this.getAttribute('initial');

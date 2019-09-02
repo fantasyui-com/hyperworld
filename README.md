@@ -1,7 +1,14 @@
 # HyperWorld OOP Language
 Virtual World of Objects.
 
-## Development Screen Shots
+## GUI Screenshots - The Universal Interface
+
+The user interface is abstracted via [Screen Object](src/organization/node_modules/Screen/index.mjs)
+no extra steps are required to craft terminal or web interface.
+
+![web-and-terminal-ui-side-by-side.png](web-and-terminal-ui-side-by-side.png)
+
+## Development Screenshots
 ![screenshot](screenshot.png)
 ![screenshot-borders](screenshot-borders.png)
 ![screenshot-robots](screenshot-robots.png)
