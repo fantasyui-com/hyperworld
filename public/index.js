@@ -1,11 +1,15 @@
-import loginComponent from '/modules/login-component/index.js';
-import navigationContainer from '/modules/navigation-container/index.js';
-import linksComponent from './modules/links-component/index.js';
-import commandComponent from './modules/command-component/index.js';
-import alertComponent from '/modules/alert-component/index.js';
-import screenComponent from './modules/screen-component/index.js';
 
-import inputComponent from './modules/input-component/index.js';
+// Menu Related
+import navigationContainer from '/modules/navigation-container/index.js';
+  import linksComponent from './modules/links-component/index.js';
+  import commandComponent from './modules/command-component/index.js';
+
+// Screen Related
+import screenComponent from './modules/screen-component/index.js';
+  import alertComponent from '/modules/alert-component/index.js';
+  import loginComponent from '/modules/login-component/index.js';
+  import inputComponent from './modules/input-component/index.js';
+  import selectComponent from './modules/select-component/index.js';
 
 const emitter = new EventEmitter();
 
@@ -14,31 +18,33 @@ async function main(){
   // Initialize Components
 
 
+  // Menu Related
   await navigationContainer({emitter});
-  await loginComponent({emitter});
+    await linksComponent({emitter});
+    await commandComponent({emitter});
 
-  await linksComponent({emitter});
-  await commandComponent({emitter});
-
-  await alertComponent({emitter});
+  // Screen Related
   await screenComponent({emitter});
-
-  await inputComponent({emitter});
+    await alertComponent({emitter});
+    await loginComponent({emitter});
+    await inputComponent({emitter});
+    await selectComponent({emitter});
 
 
   // Initialize Emitter Events
 
   emitter.on('screen',(input, response)=>{
-    console.log('response',response);
+
     const {format, type, ...packet} = input;
-    console.info('Got a screen packet!', {format, type, packet})
+
+    console.info('screen packet!', {format, type, packet})
 
     if(format === 'data'){
       emitter.emit(type, packet)
 
     }else if(format === 'input'){
       emitter.emit(format, packet, response);
-    }else if(format === 'choice'){
+    }else if(format === 'select'){
       emitter.emit(format, packet, response);
     }else if(format === 'print'){
       emitter.emit(format, packet);

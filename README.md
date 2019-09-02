@@ -1,6 +1,7 @@
 # HyperWorld OOP Language
 Virtual World of Objects.
 
+## Development Screen Shots
 ![screenshot](screenshot.png)
 ![screenshot-borders](screenshot-borders.png)
 ![screenshot-robots](screenshot-robots.png)
@@ -13,10 +14,18 @@ Virtual World of Objects.
 - Universe is made up of Locations
 - Location contain interactive Agents/Robots
 
+
+## Processing Humans - a simple approach to AI
+
+When a robot asks a question, the question is paired with pre-set anwsers:
+For example: "How are you?: [Great!]/[Awful]", or "Do you want to schedule an appointment?: [Yes]/[No]"
+![processing-humans.png](processing-humans.png)
+
 ## Interactive Components and the USE command
 
 A world needs to engage the user, a robot may ask "How are you?: [Great!]/[Awful]", or "Do you want to schedule an appointment?: [Yes]/[No]"
 (note that questions are coupled with pre-set answers to sidestep parsing)
+
 A music player may print "Which song do you want to play? [Hey There]/[The Hork Song]" these are the fundamental OBJECTS in HyperWorld small
 stateful finite XML node driven state machines. Beyond that it is just Locations and Locations within Locations ad Infinitum.
 
@@ -29,25 +38,31 @@ To tweet from within the system the user can:
 
     use twitter send 'I hate this.'
 
-## Developer Notes
-- Custom Element's Sub Elements must be registered AFTER the Main Custom Element calls customElements.define(...);
-
-## Todo
-- Robot
-- Insert a command processor where the search box is
-- Initialize Robots - Robots are the Primary way of Interacting with System
-
 ## Press
 - Project name is: HyperWorld (One word, both Hyper and World are capitalized)
-- NPM Location: https://www.npmjs.com/package/hyperworld
-- GitHub Location: https://github.com/fantasyui-com/hyperworld#readme
+- [NPM Package](https://www.npmjs.com/package/hyperworld)
+- [GitHub Repository](https://github.com/fantasyui-com/hyperworld)
 
-## Administration
-- Define Components before defining sub Components
-- do not use shorthand ```<tag/>``` use the full thing.
 
-## Notes
+## Developer Notes
 
-- robotiq
-- <script src="https://unpkg.com/lit-html/lit-html.js"></script>
-- z circle ui
+(developer note: use Atom's markdown preview plus plugin to navigate links below)
+
+## Todo
+
+- do not use shorthand ```<tag/>``` use the full <tag></tag> markup.
+- research z-circle-ui
+- robotiq state machine components
+- Web Components feel fickle, need a debug tool.
+
+### State Machine Components (was known as Robot)
+
+- Here is the state machine front-end: [Commands/Machine](src/organization/node_modules/Commands/node_modules/Machine/index.mjs)
+- State machine UI is driven by [JSON Screen Printer](src/organization/node_modules/Screen/Printer/Json.mjs)
+- Decide what to do when a component Promise expires in [JSON Screen Printer](src/organization/node_modules/Screen/Printer/Json.mjs)'s Input and Select. Note: the try/catch is located in the [Commands/Machine](src/organization/node_modules/Commands/node_modules/Machine/index.mjs)
+- FINISH: [Select Component](public/modules/select-component/index.js)
+- Initialize Robots - Robots are the Primary way of Interacting with System
+  - while the system is operational it should really be run by a subsystem
+    that employs XML to create the State Machine Tree Structure.
+- upgrade the ```USE``` command
+- REVIEW: [Input Component](public/modules/input-component/index.js)

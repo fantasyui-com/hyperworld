@@ -23,9 +23,9 @@ async function main(){
     const world = new HyperWorld(options);
     await world.initialize();
 
-
     const app = express();
     app.use(express.static('public'))
+
     var server = http.createServer(app);
     var io = socketIo(server);
 
@@ -65,6 +65,7 @@ async function main(){
       socket.on('disconnect', function(){
         console.log('user disconnected');
       });
+
     });
 
     process.on( 'SIGINT', function() {

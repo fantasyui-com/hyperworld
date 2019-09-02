@@ -86,6 +86,49 @@
 
     <!-- Templates & Script Section -->
 
+    <template id="screen-component">
+      <div>
+        <article role="main" class="main container">
+          <slot name="main"></slot>
+        </article>
+      </div>
+    </template>
+
+    <template id="select-component">
+      <style>
+      div {
+        padding: 1rem  1rem 0  1rem;
+      }
+      article {
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+
+        /* offset-x | offset-y | blur-radius | spread-radius | color */
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+      }
+      input {
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--dark);
+        padding: .5rem;
+      }
+
+      button {
+        color: var(--light);
+        border: 1px solid var(--darker);
+        background-color: var(--primary);
+        padding: .5rem;
+        border-radius: var(--border-radius);
+      }
+      </style>
+      <div class="choices">
+
+      </div>
+    </template>
+
     <template id="input-component">
       <style>
       div {
@@ -127,37 +170,7 @@
       </div>
     </template>
 
-    <template id="choice-component">
-      <style>
-      div {
-        padding: 1rem  1rem 0  1rem;
-      }
-      div > form {
-        border-radius: var(--border-radius);
-        padding: 1rem;
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
 
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-      }
-      </style>
-      <div>
-
-      </div>
-    </template>
-
-    <template id="screen-component">
-
-
-      <div>
-        <article role="main" class="main container">
-          <slot name="main"></slot>
-        </article>
-      </div>
-
-    </template>
 
 
     <template id="command-component">
