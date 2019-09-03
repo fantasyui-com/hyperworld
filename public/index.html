@@ -81,8 +81,6 @@
       <login-component slot="main" ></login-component>
     </screen-container>
 
-
-
     <!-- Templates & Script Section -->
 
     <template id="blank">
@@ -94,7 +92,12 @@
 
     <template id="screen-container">
       <link rel="stylesheet" href="style.css">
-      <main role="main" class="main container">
+      <style>
+        main {
+          padding: 1rem;
+        }
+      </style>
+      <main>
         <slot name="main"></slot>
       </main>
     </template>
@@ -102,15 +105,8 @@
     <template id="select-component">
       <link rel="stylesheet" href="style.css">
       <style>
-        button.choice {
-          color: var(--light);
-          border: 1px solid var(--darker);
-          background-color: var(--primary);
-          padding: .5rem;
-          border-radius: var(--border-radius);
-        }
       </style>
-      <div class="choices">
+      <div class="box choices">
 
       </div>
     </template>
@@ -118,48 +114,40 @@
     <template id="input-component">
       <link rel="stylesheet" href="style.css">
       <style>
-      input {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-        padding: .5rem;
+      label, small {
+        display: block;
+        margin: .5rem 0;
       }
       </style>
-      <div class="input">
+      <div class="box input">
         <form name="inputForm">
           <div>
-             <label></label>
+            <label></label>
             <input name="value" type="text" placeholder="Enter input">
-              <small>Press enter when done.</small>
+            <small>Press enter when done.</small>
           </div>
         </form>
       </div>
     </template>
 
     <template id="command-component">
+      <link rel="stylesheet" href="style.css">
       <style>
-        input[name=command] {
-          padding: .375rem .75rem;
-          font-size: 1rem;
-          line-height: 1.5;
-          border: 1px solid var(--cyan);
-          border-radius: var(--border-radius);
-          background-color: transparent;
-          color: var(--cyan);
-        }
       </style>
-
       <form name="command-form">
         <input name="command" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
       </form>
-
     </template>
 
     <template id="login-component">
       <link rel="stylesheet" href="style.css">
       <style>
+      label {
+        display: block;
+        margin: .5rem 0;
+      }
       </style>
-        <form class="form-signin d-inline-block">
+        <form name="login-form" class="box">
 
           <div>
             <label for="username">Username</label>
@@ -172,49 +160,32 @@
           </div>
 
           <div>
-            <p>
-              <span class="message">Please enter your username and password.</span>
-            </p>
+            <p class="message">Please enter your username and password.</p>
             <button type="submit">Sign in</button>
           </div>
 
         </form>
-
     </template>
 
     <template id="alert-component">
       <link rel="stylesheet" href="style.css">
       <style>
-      div {
-        padding: 1rem  1rem 0  1rem;
-      }
-      article {
-        border-radius: var(--border-radius);
-        padding: 1rem;
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-      }
-      footer {
-        font-size: .8rem;
-      }
-      hr {
-        border: 1px solid var(--darker);
-      }
+        .message {
+          font-size: .8rem;
+        }
+        hr {
+          border: 1px solid var(--darker);
+        }
       </style>
-
       <div class="box">
-          <div class="box-header">
+          <div>
             <h4><slot name="title"></slot></h4>
           </div>
-          <div class="box-body">
+          <div>
             <slot name="text"></slot>
           </div>
           <hr>
-          <div class="box-footer">
+          <div>
             <p><slot name="note"></slot></p>
           </div>
       </div>
@@ -254,85 +225,19 @@
     <template id="navigation-container">
       <link rel="stylesheet" href="style.css">
       <style>
-
-      nav {
-        display: grid;
-        grid-template-columns: 25% auto 25%;
-        grid-template-rows: auto;
-        grid-column-gap: 10px;
-        grid-row-gap: 15px;
-
-        font-family: var(--font-family-sans-serif);
-        line-height: 1.15;
-        padding: 1rem;
-        border-radius: var(--border-radius);
-
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-        /* filter: contrast(175%) brightness(103%) */
-      }
-
-      li {
-        list-style: none
-      }
-
-      a {
-        color: var(--light);
-        text-decoration: none;
-      }
-
-      .header1 { grid-area: header1; }
-      .header2 { grid-area: header2; }
-      .header3 { grid-area: header3; }
-
-      @media (max-width: 1009.98px) {
-        .header1 { place-self: start; }
-        .header2 { place-self: start; }
-        .header3 { place-self: start; }
-        nav {
-          grid-template-columns: auto; /* one column*/
-          grid-template-areas: "header1" "header2" "header3"; /* three rows */
-        }
-      }
-
-      @media (min-width: 1010px){
-        .header1 { place-self: start; }
-        .header2 { place-self: start; }
-        .header3 { place-self: end; }
-        nav {
-          grid-template-columns: 15% auto 35%; /* three columns */
-          grid-template-areas: "header1 header2 header3"; /* one row */
-        }
-      }
-
-
-
       </style>
-
       <nav>
-
-       <section class="header1">
+       <h3>
          <slot name="brand"></slot>
-       </section>
-
-
-       <section class="header2">
+       </h3>
+       <div>
          <slot name="links"></slot>
-       </section>
-
-
-       <section class="header3">
+       </div>
+       <div>
          <slot name="command"></slot>
-       </section>
-
+       </div>
       </nav>
     </template>
-
-
 
     <script src="https://unpkg.com/wolfy87-eventemitter/EventEmitter.min.js"></script>
     <script src="socket.io/socket.io.js"></script>

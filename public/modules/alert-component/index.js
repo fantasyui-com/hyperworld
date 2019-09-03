@@ -13,7 +13,7 @@ export default async function ({emitter}){
       this.shadowRoot.appendChild(templateContent.cloneNode(true));
 
       const alertBox = this.shadowRoot.querySelector('div');
-      const alertArticle = this.shadowRoot.querySelector('div article');
+      const alertArticle = this.shadowRoot.querySelector('.box');
 
       const kind = this.getAttribute('kind');
       if(kind){

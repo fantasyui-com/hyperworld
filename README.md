@@ -1,6 +1,15 @@
 # HyperWorld OOP Language
 Virtual World of Objects.
 
+I write this program in hopes of creating a general purpose orchestration language for my friends and you.
+Programming is hard, but you don't need to learn programming to be a programmer. You just need to learn writing
+things in such a way that a programmer can come in and fill in the code you need.
+
+Before we begin please visit [MUD on Wikipedia](https://en.wikipedia.org/wiki/MUD) to get a better idea where we are headed and how we are going to get there. Here, are some of the more notable YouTube videos on the subject.
+- [The MUD, or Multi User Dungeon](https://www.youtube.com/watch?v=4C7THj0VZcI)
+- [GET LAMP: The Text Adventure Documentary](https://www.youtube.com/watch?v=LRhbcDzbGSU)
+- [Search YouTube for MUD](https://www.youtube.com/results?search_query=multi+user+dungeon)
+
 ## Program Architecture
 
 Program Interfaces / Clients

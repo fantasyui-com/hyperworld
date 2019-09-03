@@ -1,19 +1,36 @@
 /* Shared Stylesheet */
 
 .box {
-  border: 1px dotted var(--red);
+  margin-bottom: 1rem;
 }
-
-div {
-  padding: 1rem  1rem 0  1rem;
-}
-article {
-  border-radius: var(--border-radius);
+nav, .box {
+  line-height: 1.15;
   padding: 1rem;
+  border-radius: var(--border-radius);
+
   color: var(--light);
   border: 1px solid var(--darker);
   background-color: var(--dark);
 
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
+}
+
+nav > * {
+  display: inline-block;
+  margin: .5rem 2rem .5rem 0;
+}
+
+input {
+  color: var(--light);
+  border: 1px solid var(--darker);
+  background-color: var(--dark);
+  padding: .5rem;
+}
+
+button {
+  color: var(--dark);
+  border: 1px solid var(--darker);
+  background-color: var(--secondary);
+  padding: .5rem;
+  border-radius: var(--border-radius);
 }
