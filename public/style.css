@@ -23,14 +23,14 @@ nav > * {
 input {
   color: var(--light);
   border: 1px solid var(--darker);
-  background-color: var(--dark);
+  background-color: var(--gray-dark);
   padding: .5rem;
 }
 
 button {
-  color: var(--dark);
-  border: 1px solid var(--darker);
-  background-color: var(--secondary);
+  color: var(--light);
+  border: 1px solid var(--dark);
+  background-color: var(--gray-dark);
   padding: .5rem;
   border-radius: var(--border-radius);
 }

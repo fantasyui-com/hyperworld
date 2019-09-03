@@ -1,7 +1,9 @@
 # HyperWorld OOP Language
 Virtual World of Objects.
 
-I write this program in hopes of creating a general purpose orchestration language for my friends and you.
+![screenshot](screenshot.png)
+
+I write this program in hopes of creating a general purpose orchestration language for my friends, and you.
 Programming is hard, but you don't need to learn programming to be a programmer. You just need to learn writing
 things in such a way that a programmer can come in and fill in the code you need.
 
