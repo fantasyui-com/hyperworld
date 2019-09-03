@@ -66,21 +66,20 @@
     NOTE: You must use <tag></tag>, you can't use <tag/>
     -->
 
-
     <navigation-container>
       <span slot="brand">HyperWorld Administrator</span>
       <links-component slot="links"></links-component>
       <command-component slot="command"></command-component>
     </navigation-container>
 
-    <screen-component>
+    <screen-container>
       <alert-component slot="main" >
         <span slot="title">HyperWorld Administrator</span>
         <span slot="text">Welcome to HyperWorld</span>
         <span slot="note">Please, register or login.</span>
       </alert-component>
       <login-component slot="main" ></login-component>
-    </screen-component>
+    </screen-container>
 
 
 
@@ -89,56 +88,27 @@
     <template id="blank">
       <link rel="stylesheet" href="style.css">
       <style>
-        div {
-
-        }
       </style>
-      <div>
-        <div>
-          <!-- ... -->
-        </div>
-      </div>
+      <div class="box"></div>
     </template>
 
-    <template id="screen-component">
+    <template id="screen-container">
       <link rel="stylesheet" href="style.css">
-      <div>
-        <article role="main" class="main container">
-          <slot name="main"></slot>
-        </article>
-      </div>
+      <main role="main" class="main container">
+        <slot name="main"></slot>
+      </main>
     </template>
 
     <template id="select-component">
       <link rel="stylesheet" href="style.css">
       <style>
-      div {
-        padding: 1rem  1rem 0  1rem;
-      }
-      article {
-        border-radius: var(--border-radius);
-        padding: 1rem;
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-      }
-      input {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-        padding: .5rem;
-      }
-
-      button {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--primary);
-        padding: .5rem;
-        border-radius: var(--border-radius);
-      }
+        button.choice {
+          color: var(--light);
+          border: 1px solid var(--darker);
+          background-color: var(--primary);
+          padding: .5rem;
+          border-radius: var(--border-radius);
+        }
       </style>
       <div class="choices">
 
@@ -148,35 +118,14 @@
     <template id="input-component">
       <link rel="stylesheet" href="style.css">
       <style>
-      div {
-        padding: 1rem  1rem 0  1rem;
-      }
-      article {
-        border-radius: var(--border-radius);
-        padding: 1rem;
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-      }
       input {
         color: var(--light);
         border: 1px solid var(--darker);
         background-color: var(--dark);
         padding: .5rem;
       }
-
-      button {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--primary);
-        padding: .5rem;
-        border-radius: var(--border-radius);
-      }
       </style>
-      <div>
+      <div class="input">
         <form name="inputForm">
           <div>
              <label></label>
@@ -189,36 +138,7 @@
 
     <template id="command-component">
       <style>
-        form {
-          display: inline-block;
-          float: right;
-        }
-        input {
-          vertical-align: middle;
-          padding: .375rem .75rem;
-          font-size: 1rem;
-          line-height: 1.5;
-          border: 1px solid var(--cyan);
-          border-radius: var(--border-radius);
-          background-color: transparent;
-          color: var(--cyan);
-        }
-
-        button::-moz-focus-inner {
-          border-color: transparent;
-        }
-        button:hover {
-          background-color: var(--cyan);
-          color: var(--dark);
-        }
-        button:active {
-          border-color: var(--orange);
-          background-color: var(--yellow);
-          color: var(--light);
-        }
-        button {
-          text-align: center;
-          vertical-align: middle;
+        input[name=command] {
           padding: .375rem .75rem;
           font-size: 1rem;
           line-height: 1.5;
@@ -228,137 +148,38 @@
           color: var(--cyan);
         }
       </style>
+
       <form name="command-form">
         <input name="command" type="text" placeholder="Command (or enter 'help')" aria-label="Command">
-        <button type="submit">Run</button>
       </form>
+
     </template>
 
     <template id="login-component">
       <link rel="stylesheet" href="style.css">
       <style>
-      article {
-        padding: 1rem;
-      }
-
-      form {
-        border-radius: var(--border-radius);
-        padding: 1rem  1rem 0  1rem;
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-
-        /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2), inset 0px 0px 10px 5px rgba(29, 29, 29, 0.2);
-      }
-
-
-      section {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: auto;
-        grid-template-areas:
-          "label input";
-        align-items: center;
-
-      }
-
-      label {
-        justify-self: end;
-        grid-area: label;
-      }
-
-      input {
-        grid-area: input;
-      }
-
-      input {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--dark);
-        padding: .5rem;
-      }
-
-      button {
-        color: var(--light);
-        border: 1px solid var(--darker);
-        background-color: var(--primary);
-        padding: .5rem;
-        border-radius: var(--border-radius);
-      }
-
-      label {
-        display: inline-block;
-        padding-right: 1rem;
-      }
-
-      @media (max-width: 575.98px) {
-        section {grid-template-columns: 100%; grid-template-areas: "input";}
-        label { display: none; }
-      }
-
-      /* Extra small devices (portrait phones, less than 576px) */
-      @media (min-width: 576px) and (max-width: 767.98px) {
-        section {
-          /*background-color: red;*/
-          grid-template-columns: 40% auto;
-        }
-      }
-
-      /* Small devices (landscape phones, less than 768px) */
-      @media (min-width: 768px) and (max-width: 991.98px) {
-        section {
-          /*background-color: green;*/
-          grid-template-columns: 30% auto;
-        }
-      }
-
-      /* Medium devices (tablets, less than 992px) */
-      @media (min-width: 992px) and (max-width: 1199.98px) {
-        section {
-          /*background-color: blue;*/
-          grid-template-columns: 20% auto;
-        }
-      }
-
-      /* Large devices (desktops, less than 1200px) */
-      @media (min-width: 1200px) {
-        section {
-          /*background-color: yellow;*/
-          grid-template-columns: 10% auto;
-        }
-      }
-
-
-
-
-
-
-
-
       </style>
-      <article>
-        <form id="login-form" class="form-signin d-inline-block">
+        <form class="form-signin d-inline-block">
 
-          <section>
+          <div>
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Username" required autofocus value="anonymous">
-          </section>
+          </div>
 
-          <section>
+          <div>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required value="anonymous">
-          </section>
+          </div>
 
-          <footer>
+          <div>
             <p>
               <span class="message">Please enter your username and password.</span>
             </p>
             <button type="submit">Sign in</button>
-          </footer>
+          </div>
 
         </form>
-      <article>
+
     </template>
 
     <template id="alert-component">
@@ -385,17 +206,17 @@
       }
       </style>
 
-      <div>
-        <article class="card">
-          <header>
+      <div class="box">
+          <div class="box-header">
             <h4><slot name="title"></slot></h4>
-          </header>
-          <p><slot name="text"></slot></p>
+          </div>
+          <div class="box-body">
+            <slot name="text"></slot>
+          </div>
           <hr>
-          <footer>
+          <div class="box-footer">
             <p><slot name="note"></slot></p>
-          </footer>
-        </article>
+          </div>
       </div>
     </template>
 

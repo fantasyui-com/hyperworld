@@ -31,6 +31,7 @@ export default async function ({emitter}){
         input.value = value;
 
         button.textContent = name;
+        button.classList.add('choice');
 
         form.appendChild(input);
         form.appendChild(button);

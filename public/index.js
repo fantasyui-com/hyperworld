@@ -5,7 +5,7 @@ import navigationContainer from '/modules/navigation-container/index.js';
   import commandComponent from './modules/command-component/index.js';
 
 // Screen Related
-import screenComponent from './modules/screen-component/index.js';
+import screenContainer from './modules/screen-container/index.js';
   import alertComponent from '/modules/alert-component/index.js';
   import loginComponent from '/modules/login-component/index.js';
   import inputComponent from './modules/input-component/index.js';
@@ -17,14 +17,13 @@ async function main(){
 
   // Initialize Components
 
-
   // Menu Related
   await navigationContainer({emitter});
     await linksComponent({emitter});
     await commandComponent({emitter});
 
   // Screen Related
-  await screenComponent({emitter});
+  await screenContainer({emitter});
     await alertComponent({emitter});
     await loginComponent({emitter});
     await inputComponent({emitter});

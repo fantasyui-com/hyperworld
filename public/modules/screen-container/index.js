@@ -7,10 +7,10 @@ export default async function ({emitter}){
     )
   }
 
-  class ScreenComponent extends HTMLElement {
+  class ScreenContainer extends HTMLElement {
     constructor(...args) {
       const self = super(...args);
-      const templateSelector = '#screen-component';
+      const templateSelector = '#screen-container';
       const template = document.querySelector(templateSelector);
       const templateContent = template.content;
       const shadowRoot = this.attachShadow({mode: 'open'});
@@ -67,6 +67,6 @@ export default async function ({emitter}){
       return self;
     }
   }
-  customElements.define('screen-component', ScreenComponent);
-  return ScreenComponent;
+  customElements.define('screen-container', ScreenContainer);
+  return ScreenContainer;
 }
