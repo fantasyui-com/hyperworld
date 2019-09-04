@@ -9,6 +9,7 @@ import Session from 'Session';
 export default class Root {
 
   universe = new Universe();
+
   commands = new Commands();
 
   constructor({ mapFile, godMode, screenPrinter, userName, context }) {
