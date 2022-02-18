@@ -32,7 +32,7 @@
     "handlebars": "^4.1.2",
     "hyperworld-readline": "^1.2.0",
     "lodash": "^4.17.15",
-    "socket.io": "^2.2.0",
+    "socket.io": "^4.4.1",
     "uuid": "^3.3.2",
     "xml-js": "^1.6.11"
   }
